@@ -42,6 +42,7 @@
                 android:scrollHorizontally="false"
                 android:text="TextView"
                 android:textSize="20sp" />
+
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

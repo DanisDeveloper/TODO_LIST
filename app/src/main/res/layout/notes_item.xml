@@ -36,7 +36,7 @@
                 android:background="@color/grey"
                 android:gravity="left|center_vertical"
                 android:minHeight="48dp"
-                android:text="date"
+                android:text="title"
                 android:textSize="24sp"
                 tools:layout_conversion_absoluteHeight="192dp"
                 tools:layout_conversion_absoluteWidth="0dp"

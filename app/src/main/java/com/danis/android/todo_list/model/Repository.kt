@@ -32,7 +32,16 @@ class Repository(context:Context) {
 
     fun getNotesList():LiveData<List<CaseNotes>> = DAO.getNotesList()
     fun getNote(id:UUID):LiveData<CaseNotes> = DAO.getNote(id)
-
+    fun insertNotes(case:CaseNotes) {
+        executor.execute{
+            DAO.insertNotes(case)
+        }
+    }
+    fun updateNotes(case:CaseNotes) {
+        executor.execute{
+            DAO.insertNotes(case)
+        }
+    }
 
     companion object{
         private var INSTANCE:Repository? = null

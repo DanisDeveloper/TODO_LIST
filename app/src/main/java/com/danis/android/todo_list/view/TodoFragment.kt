@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,13 +12,12 @@ import com.danis.android.todo_list.R
 import com.danis.android.todo_list.databinding.FragmentTodoBinding
 import com.danis.android.todo_list.databinding.TodoItemBinding
 import com.danis.android.todo_list.model.CaseTODO
+import com.danis.android.todo_list.model.getDate
 import com.danis.android.todo_list.viewModel.TODOViewModel
-
-private const val sizeList = 31
+import com.google.android.material.snackbar.Snackbar
 
 class TodoFragment : Fragment() {
     private lateinit var binding:FragmentTodoBinding
-    private var case = CaseTODO()
     private  var adapter = Adapter(emptyList())
     private val todoViewModel:TODOViewModel by lazy {
         ViewModelProvider(this).get(TODOViewModel::class.java)
@@ -41,19 +39,15 @@ class TodoFragment : Fragment() {
             adapter = Adapter(list)
             binding.recyclerView.adapter = adapter
         })
-
     }
 
     override fun onResume() {
         super.onResume()
-
         binding.addButton.setOnClickListener {
-            Toast.makeText(activity,"addButton",Toast.LENGTH_SHORT).show()
             todoViewModel.onClickAddButton()
         }
         binding.calendarButton.setOnClickListener {
-            Toast.makeText(activity,"calendarButton",Toast.LENGTH_SHORT).show()
-            todoViewModel.onClickCalendarButton()
+            todoViewModel.onClickCalendarButton(getDate())
         }
     }
 
@@ -63,10 +57,9 @@ class TodoFragment : Fragment() {
             binding.checkBox.isChecked = case.isSolved
             binding.textView.text = case.todo
             itemView.setOnClickListener {
-
+                Snackbar.make(view!!,binding.textView.text.toString(),Snackbar.LENGTH_SHORT).show()
             }
         }
-
     }
 
     private inner class Adapter(val list:List<CaseTODO>):RecyclerView.Adapter<Holder>(){
@@ -74,20 +67,17 @@ class TodoFragment : Fragment() {
             val view = layoutInflater.inflate(R.layout.todo_item,parent,false)
             return Holder(view)
         }
-
         override fun onBindViewHolder(holder: Holder, position: Int) {
           holder.bind(list[position])
         }
-
         override fun getItemCount(): Int = list.size
-
     }
 
     companion object {
         fun newInstance() = TodoFragment().apply {
-                arguments = Bundle().apply {
+            arguments = Bundle().apply {
 
-                }
             }
+        }
     }
 }

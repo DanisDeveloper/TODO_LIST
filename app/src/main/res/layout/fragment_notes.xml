@@ -32,18 +32,20 @@
         </androidx.cardview.widget.CardView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+            android:id="@+id/addButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:clickable="true"
+            android:focusable="true"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:maxImageSize="40dp"
+            app:maxImageSize="36dp"
             app:srcCompat="@drawable/ic_add"
-            app:tint="@color/white"
-            tools:ignore="SpeakableTextPresentCheck" />
+            app:tint="@color/white" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
