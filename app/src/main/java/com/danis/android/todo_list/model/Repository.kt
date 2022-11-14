@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.danis.android.todo_list.model.database.DataBase
 import java.util.*
+import java.util.concurrent.Executors
 
 private const val DATABASE_NAME = "TODO_DATABASE"
 
@@ -15,8 +16,20 @@ class Repository(context:Context) {
         DATABASE_NAME
     ).build()
     private val DAO = database.DAO()
+    private val executor = Executors.newSingleThreadExecutor()
 
     fun getTODOList(date:Date):LiveData<List<CaseTODO>> = DAO.getTODOList(date)
+    fun insertTODO(case:CaseTODO) {
+        executor.execute{
+            DAO.insertTODO(case)
+        }
+    }
+    fun updateTODO(case:CaseTODO) {
+        executor.execute{
+            DAO.updateTODO(case)
+        }
+    }
+
     fun getNotesList():LiveData<List<CaseNotes>> = DAO.getNotesList()
     fun getNote(id:UUID):LiveData<CaseNotes> = DAO.getNote(id)
 
