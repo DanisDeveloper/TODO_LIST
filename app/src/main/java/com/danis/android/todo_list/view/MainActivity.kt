@@ -1,0 +1,27 @@
+package com.danis.android.todo_list.view
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import com.danis.android.todo_list.R
+import com.danis.android.todo_list.databinding.ActivityMainBinding
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+
+class MainActivity : AppCompatActivity() {
+    private lateinit var binding:ActivityMainBinding
+    private lateinit var viewPagerAdapter:ViewPagerAdapter
+    private val fragmentList = listOf(TodoFragment.newInstance(),NotesFragment.newInstance())
+    private val fragmentListTitles = listOf("TODO","Notes")
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        viewPagerAdapter = ViewPagerAdapter(this,fragmentList)
+        binding.viewPager.adapter = viewPagerAdapter
+        TabLayoutMediator(binding.tabLayout,binding.viewPager){ tab,position ->
+            tab?.text = fragmentListTitles[position]
+        }.attach()
+
+    }
+}
