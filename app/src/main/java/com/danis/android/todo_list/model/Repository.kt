@@ -24,9 +24,9 @@ class Repository(context:Context) {
             DAO.insertTODO(case)
         }
     }
-    fun updateTODO(case:CaseTODO) {
+    fun updateTODO(list:List<CaseTODO>) {
         executor.execute{
-            DAO.updateTODO(case)
+            DAO.updateTODO(list)
         }
     }
 

@@ -20,4 +20,7 @@ class TODOViewModel:ViewModel() {
         //TODO
     }
 
+    fun saveTODOList(list:List<CaseTODO>){
+        repository.updateTODO(list)
+    }
 }

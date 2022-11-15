@@ -18,7 +18,7 @@ interface DAO {
     fun insertTODO(case:CaseTODO)
 
     @Update
-    fun updateTODO(case: CaseTODO)
+    fun updateTODO(list:List<CaseTODO>)
 
 
     @Query("SELECT * FROM CaseNotes")

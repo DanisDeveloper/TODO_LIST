@@ -10,9 +10,12 @@
         <item name="colorSecondaryVariant">@color/orange</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+    </style>
+    <style name="TabLayoutStyle" parent="Base.TextAppearance.MaterialComponents.Button">
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>
