@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TODO_LIST</string>
+    <string name="app_name">Notepad</string>
     <string name="TODO">TODO</string>
     <string name="Notes">Notes</string>
     <string name="calendar">Calendar</string>
@@ -8,4 +8,5 @@
     <string name="search_notes_hint">search notes</string>
     <string name="hint_task">Task</string>
     <string name="hint_title">Title</string>
+    <string name="hint_content">Content</string>
 </resources>

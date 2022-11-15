@@ -1,11 +1,15 @@
 package com.danis.android.todo_list.view
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +20,7 @@ import com.danis.android.todo_list.databinding.NotesItemBinding
 import com.danis.android.todo_list.databinding.TodoItemBinding
 import com.danis.android.todo_list.model.CaseNotes
 import com.danis.android.todo_list.viewModel.NotesViewModel
+import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -25,6 +30,7 @@ class NotesFragment : Fragment() {
     private val notesViewModel:NotesViewModel by lazy{
         ViewModelProvider(this).get(NotesViewModel::class.java)
     }
+    private var launcher:ActivityResultLauncher<Intent>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,12 +48,19 @@ class NotesFragment : Fragment() {
             adapter = Adapter(list)
             binding.recyclerView.adapter = adapter
         })
+        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            if(it.resultCode == RESULT_OK){
+
+            }
+        }
     }
 
     override fun onResume() {
         super.onResume()
         binding.addButton.setOnClickListener {
-            notesViewModel.onClickAddButton()
+            //notesViewModel.onClickAddButton()
+            val intent = Intent(context,NoteDetailActivity::class.java)
+            startActivity(intent)
         }
     }
 

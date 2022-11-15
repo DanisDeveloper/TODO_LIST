@@ -73,7 +73,7 @@ class TodoFragment : Fragment() {
             binding.textView.setText(TODOList[index].todo, TextView.BufferType.EDITABLE)
             binding.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
                 TODOList[index].isSolved = isChecked
-                    strike(isChecked)
+                strike(isChecked)
             }
             binding.textView.addTextChangedListener(object :TextWatcher{
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
