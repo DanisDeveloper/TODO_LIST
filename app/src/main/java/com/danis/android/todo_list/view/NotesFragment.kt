@@ -63,17 +63,24 @@ class NotesFragment : Fragment() {
     private inner class Holder(view:View): RecyclerView.ViewHolder(view){
         var binding = NotesItemBinding.bind(view)
         fun bind(case: CaseNotes){
-            itemView.setOnClickListener {
-                val intent = Intent(context,NoteDetailActivity::class.java).apply {
-                    val bundle = Bundle().apply {
-                        putSerializable(NOTE_ID,case.id)
-                    }
-                    putExtras(bundle)
-                    putExtra(EXISTED,true)
-                }
-                startActivity(intent)
-            }
             binding.titleTextView.text = case.Title
+            itemView.setOnClickListener {
+                startNote(case.id)
+            }
+            // второй - это костыль,т.к. новое activity не открывалось по нажатию на textView
+            binding.titleTextView.setOnClickListener {
+                startNote(case.id)
+            }
+        }
+        fun startNote(id:UUID){
+            val intent = Intent(context,NoteDetailActivity::class.java).apply {
+                val bundle = Bundle().apply {
+                    putSerializable(NOTE_ID,id)
+                }
+                putExtras(bundle)
+                putExtra(EXISTED,true)
+            }
+            startActivity(intent)
         }
     }
 

@@ -1,14 +1,12 @@
 package com.danis.android.todo_list.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.danis.android.todo_list.R
@@ -70,12 +68,5 @@ class NoteDetailActivity : AppCompatActivity() {
         super.onStop()
         if(existed!!) noteDetailViewModel.updateNote(case)
         else noteDetailViewModel.saveNote(case)
-    }
-
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        when (keyCode) {
-            KeyEvent.KEYCODE_BACK -> Toast.makeText(applicationContext, "Back Key Pressed", Toast.LENGTH_SHORT).show()
-        }
-        return super.onKeyDown(keyCode, event)
     }
 }
