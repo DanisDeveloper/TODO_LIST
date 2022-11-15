@@ -25,7 +25,7 @@ interface DAO {
     fun getNotesList():LiveData<List<CaseNotes>>
 
     @Query("SELECT * FROM CaseNotes WHERE id=(:id)")
-    fun getNote(id:UUID):LiveData<CaseNotes>
+    fun getNote(id:UUID):LiveData<CaseNotes?>
 
     @Insert
     fun insertNotes(case:CaseNotes)

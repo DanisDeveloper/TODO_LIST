@@ -8,47 +8,37 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/corner_16dp"
+        android:backgroundTint="@color/grey"
+        >
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/notes_item_cardView"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/title_textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/grey"
-            app:cardCornerRadius="16dp"
+            android:gravity="left|center_vertical"
+            android:hint="@string/hint_title"
+            android:inputType="textNoSuggestions|textMultiLine"
+            android:minHeight="48dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:scrollbars="vertical"
+            android:scrollHorizontally="false"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hint"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_conversion_absoluteHeight="192dp"
-            tools:layout_conversion_absoluteWidth="0dp">
-
-            <TextView
-                android:id="@+id/title_textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center_vertical"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@color/grey"
-                android:gravity="left|center_vertical"
-                android:hint="@string/hint_title"
-                android:inputType="textNoSuggestions|textMultiLine"
-                android:minHeight="48dp"
-                android:scrollbars="vertical"
-                android:scrollHorizontally="false"
-                android:textColor="@color/black"
-                android:textColorHint="@color/hint"
-                android:textSize="20sp"
-                tools:layout_conversion_absoluteHeight="192dp"
-                tools:layout_conversion_absoluteWidth="0dp"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp" />
-
-        </androidx.cardview.widget.CardView>
+            tools:layout_conversion_absoluteWidth="0dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

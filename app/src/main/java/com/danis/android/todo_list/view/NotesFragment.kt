@@ -24,14 +24,15 @@ import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
 
+private const val NOTE_ID = "NOTE_ID"
+private const val EXISTED = "EXISTED"
+
 class NotesFragment : Fragment() {
     private lateinit var binding: FragmentNotesBinding
     private var adapter = Adapter(emptyList())
     private val notesViewModel:NotesViewModel by lazy{
         ViewModelProvider(this).get(NotesViewModel::class.java)
     }
-    private var launcher:ActivityResultLauncher<Intent>? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,11 +49,6 @@ class NotesFragment : Fragment() {
             adapter = Adapter(list)
             binding.recyclerView.adapter = adapter
         })
-        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            if(it.resultCode == RESULT_OK){
-
-            }
-        }
     }
 
     override fun onResume() {
@@ -67,10 +63,17 @@ class NotesFragment : Fragment() {
     private inner class Holder(view:View): RecyclerView.ViewHolder(view){
         var binding = NotesItemBinding.bind(view)
         fun bind(case: CaseNotes){
-            binding.titleTextView.text = case.Title
             itemView.setOnClickListener {
-
+                val intent = Intent(context,NoteDetailActivity::class.java).apply {
+                    val bundle = Bundle().apply {
+                        putSerializable(NOTE_ID,case.id)
+                    }
+                    putExtras(bundle)
+                    putExtra(EXISTED,true)
+                }
+                startActivity(intent)
             }
+            binding.titleTextView.text = case.Title
         }
     }
 

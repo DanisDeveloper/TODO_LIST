@@ -2,10 +2,14 @@ package com.danis.android.todo_list.view
 
 import android.os.Bundle
 import android.text.Editable
+import android.text.Spannable
+import android.text.Spanned
 import android.text.TextWatcher
+import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -64,16 +68,18 @@ class TodoFragment : Fragment() {
         todoViewModel.saveTODOList(TODOList)
     }
 
+
+
     private inner class Holder(view:View):RecyclerView.ViewHolder(view){
         var binding = TodoItemBinding.bind(view)
         fun bind(case:CaseTODO){
             val index = TODOList.indexOfFirst { it.id==case.id }
             binding.checkBox.isChecked = TODOList[index].isSolved
-            strike(binding.checkBox.isChecked)
             binding.textView.setText(TODOList[index].todo, TextView.BufferType.EDITABLE)
+            checkForStrike(binding.checkBox.isChecked)
             binding.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
                 TODOList[index].isSolved = isChecked
-                strike(isChecked)
+                checkForStrike(isChecked)
             }
             binding.textView.addTextChangedListener(object :TextWatcher{
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -87,12 +93,20 @@ class TodoFragment : Fragment() {
                 Snackbar.make(view!!,binding.textView.text.toString(),Snackbar.LENGTH_SHORT).show()
             }
         }
-       private fun strike(isChecked:Boolean){
-           if(isChecked)
-               binding.textView.foreground = activity?.let { ContextCompat.getDrawable(it,R.drawable.strike_edit_text) }
-           else
-               binding.textView.foreground = null
+       private fun checkForStrike(isChecked:Boolean){
+           if(isChecked) strike(binding.textView.text.toString())
+           else unstrike(binding.textView.text.toString())
        }
+        private fun strike(str:String){
+            var STRIKE_THROUGH_SPAN = StrikethroughSpan()
+            binding.textView.setText(str,TextView.BufferType.SPANNABLE)
+            var spannable:Spannable = binding.textView.text
+            spannable.setSpan(STRIKE_THROUGH_SPAN,0,binding.textView.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        private fun unstrike(str:String){
+            binding.textView.setText(str,TextView.BufferType.NORMAL)
+        }
+
     }
 
     private inner class Adapter(val list:List<CaseTODO>):RecyclerView.Adapter<Holder>(){

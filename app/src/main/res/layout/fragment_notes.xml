@@ -7,29 +7,21 @@
         android:layout_height="match_parent"
         tools:context=".view.NotesFragment">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/search_notes_cardView"
-            android:layout_width="match_parent"
+        <SearchView
+            android:id="@+id/notes_searchView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:background="@drawable/corner_32dp"
             android:backgroundTint="@color/grey"
-            app:cardCornerRadius="100dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@android:color/transparent"
+            android:queryHint="@string/search_notes_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
-
-            <SearchView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:iconifiedByDefault="false"
-                android:queryBackground="@android:color/transparent"
-                android:queryHint="@string/search_notes_hint" />
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addButton"
@@ -55,7 +47,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_notes_cardView" />
+            app:layout_constraintTop_toBottomOf="@+id/notes_searchView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -31,7 +31,7 @@ class Repository(context:Context) {
     }
 
     fun getNotesList():LiveData<List<CaseNotes>> = DAO.getNotesList()
-    fun getNote(id:UUID):LiveData<CaseNotes> = DAO.getNote(id)
+    fun getNote(id:UUID):LiveData<CaseNotes?> = DAO.getNote(id)
     fun insertNotes(case:CaseNotes) {
         executor.execute{
             DAO.insertNotes(case)
@@ -39,7 +39,7 @@ class Repository(context:Context) {
     }
     fun updateNotes(case:CaseNotes) {
         executor.execute{
-            DAO.insertNotes(case)
+            DAO.updateNotes(case)
         }
     }
 
