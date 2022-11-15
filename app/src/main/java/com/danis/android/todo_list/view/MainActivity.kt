@@ -1,11 +1,10 @@
 package com.danis.android.todo_list.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.danis.android.todo_list.R
 import com.danis.android.todo_list.databinding.ActivityMainBinding
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         viewPagerAdapter = ViewPagerAdapter(this,fragmentList)
         binding.viewPager.adapter = viewPagerAdapter
         TabLayoutMediator(binding.tabLayout,binding.viewPager){ tab,position ->
-            tab?.text = fragmentListTitles[position]
+            tab.text = fragmentListTitles[position]
         }.attach()
 
     }

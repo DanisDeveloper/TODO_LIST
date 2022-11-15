@@ -9,9 +9,7 @@ import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,8 +66,6 @@ class TodoFragment : Fragment() {
         todoViewModel.saveTODOList(TODOList)
     }
 
-
-
     private inner class Holder(view:View):RecyclerView.ViewHolder(view){
         var binding = TodoItemBinding.bind(view)
         fun bind(case:CaseTODO){
@@ -98,9 +94,9 @@ class TodoFragment : Fragment() {
            else unstrike(binding.textView.text.toString())
        }
         private fun strike(str:String){
-            var STRIKE_THROUGH_SPAN = StrikethroughSpan()
+            val STRIKE_THROUGH_SPAN = StrikethroughSpan()
             binding.textView.setText(str,TextView.BufferType.SPANNABLE)
-            var spannable:Spannable = binding.textView.text
+            val spannable:Spannable = binding.textView.text
             spannable.setSpan(STRIKE_THROUGH_SPAN,0,binding.textView.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         private fun unstrike(str:String){

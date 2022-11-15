@@ -1,27 +1,19 @@
 package com.danis.android.todo_list.view
 
-import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.danis.android.todo_list.R
 import com.danis.android.todo_list.databinding.FragmentNotesBinding
-import com.danis.android.todo_list.databinding.FragmentTodoBinding
 import com.danis.android.todo_list.databinding.NotesItemBinding
-import com.danis.android.todo_list.databinding.TodoItemBinding
 import com.danis.android.todo_list.model.CaseNotes
 import com.danis.android.todo_list.viewModel.NotesViewModel
-import com.google.android.material.snackbar.Snackbar
-import java.text.SimpleDateFormat
 import java.util.*
 
 private const val NOTE_ID = "NOTE_ID"

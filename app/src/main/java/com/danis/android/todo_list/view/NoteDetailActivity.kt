@@ -1,9 +1,11 @@
 package com.danis.android.todo_list.view
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.KeyEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -31,7 +33,7 @@ class NoteDetailActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_note_detail)
         val bundle = intent.extras
         bundle?.let {
-            noteDetailViewModel.loadNote(bundle?.getSerializable(NOTE_ID) as UUID)
+            noteDetailViewModel.loadNote(bundle.getSerializable(NOTE_ID) as UUID)
         }
 
         existed = intent?.getBooleanExtra(EXISTED,false)
@@ -62,6 +64,7 @@ class NoteDetailActivity : AppCompatActivity() {
                 override fun afterTextChanged(s: Editable?) {}
             })
         }
+
     }
 
     override fun onStop() {
