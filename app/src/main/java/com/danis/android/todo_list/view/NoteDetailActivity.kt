@@ -19,7 +19,6 @@ import java.util.*
 
 
 private const val NOTE_ID = "NOTE_ID"
-private const val EXISTED = "EXISTED"
 
 class NoteDetailActivity : AppCompatActivity() {
     private lateinit var binding:ActivityNoteDetailBinding
@@ -27,7 +26,6 @@ class NoteDetailActivity : AppCompatActivity() {
         ViewModelProvider(this).get(NoteDetailViewModel::class.java)
     }
     private var case = CaseNotes()
-    private var existed :Boolean? = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_note_detail)
@@ -35,8 +33,6 @@ class NoteDetailActivity : AppCompatActivity() {
         bundle?.let {
             noteDetailViewModel.loadNote(bundle.getSerializable(NOTE_ID) as UUID)
         }
-
-        existed = intent?.getBooleanExtra(EXISTED,false)
     }
 
     override fun onStart() {
@@ -69,7 +65,6 @@ class NoteDetailActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        if(existed!!) noteDetailViewModel.updateNote(case)
-        else noteDetailViewModel.saveNote(case)
+        noteDetailViewModel.updateNote(case)
     }
 }

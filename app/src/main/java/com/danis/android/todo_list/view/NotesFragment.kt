@@ -17,7 +17,6 @@ import com.danis.android.todo_list.viewModel.NotesViewModel
 import java.util.*
 
 private const val NOTE_ID = "NOTE_ID"
-private const val EXISTED = "EXISTED"
 
 class NotesFragment : Fragment() {
     private lateinit var binding: FragmentNotesBinding
@@ -48,9 +47,9 @@ class NotesFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         binding.addButton.setOnClickListener {
-            //notesViewModel.onClickAddButton()
-            val intent = Intent(context,NoteDetailActivity::class.java)
-            startActivity(intent)
+            val temp_case = CaseNotes()
+            notesViewModel.onClickAddButton(temp_case)
+            startNote(temp_case.id)
         }
     }
 
@@ -66,18 +65,17 @@ class NotesFragment : Fragment() {
                 startNote(case.id)
             }
         }
-        fun startNote(id:UUID){
-            val intent = Intent(context,NoteDetailActivity::class.java).apply {
-                val bundle = Bundle().apply {
-                    putSerializable(NOTE_ID,id)
-                }
-                putExtras(bundle)
-                putExtra(EXISTED,true)
-            }
-            startActivity(intent)
-        }
-    }
 
+    }
+    fun startNote(id:UUID){
+        val intent = Intent(context,NoteDetailActivity::class.java).apply {
+            val bundle = Bundle().apply {
+                putSerializable(NOTE_ID,id)
+            }
+            putExtras(bundle)
+        }
+        startActivity(intent)
+    }
     private inner class Adapter(val list:List<CaseNotes>): RecyclerView.Adapter<Holder>(){
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
             val view = layoutInflater.inflate(R.layout.notes_item,parent,false)
