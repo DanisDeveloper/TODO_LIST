@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,8 +23,12 @@ import com.danis.android.todo_list.model.CaseTODO
 import com.danis.android.todo_list.model.getDate
 import com.danis.android.todo_list.viewModel.TODOViewModel
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
-class TodoFragment : Fragment() {
+private const val DATE_PICKER_DIALOG_TAG = "DATE_PICKER_DIALOG_TAG"
+private const val DATE_PICKER_DIALOG_REQUEST_CODE = 0
+
+class TodoFragment : Fragment(),DatePickerFragment.Callback {
     private lateinit var binding:FragmentTodoBinding
     private  var adapter = Adapter(emptyList())
     private var TODOList:List<CaseTODO> = emptyList()
@@ -30,6 +36,10 @@ class TodoFragment : Fragment() {
         ViewModelProvider(this).get(TODOViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        todoViewModel.loadTODOList(getDate())
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,7 +67,13 @@ class TodoFragment : Fragment() {
             todoViewModel.onClickAddButton()
         }
         binding.calendarButton.setOnClickListener {
-            todoViewModel.onClickCalendarButton(getDate())
+            todoViewModel.saveTODOList(TODOList)
+            activity?.let { it ->
+                DatePickerFragment.newInstance(getDate()).apply {
+                    setTargetFragment(this@TodoFragment,DATE_PICKER_DIALOG_REQUEST_CODE)
+                    show(it.supportFragmentManager,DATE_PICKER_DIALOG_TAG)
+                }
+            }
         }
     }
 
@@ -116,6 +132,10 @@ class TodoFragment : Fragment() {
         override fun getItemCount(): Int = list.size
     }
 
+    override fun onDateSelected(date: Date) {
+        todoViewModel.loadTODOList(date)
+    }
+
     companion object {
         fun newInstance() = TodoFragment().apply {
             arguments = Bundle().apply {
@@ -123,4 +143,6 @@ class TodoFragment : Fragment() {
             }
         }
     }
+
+
 }
