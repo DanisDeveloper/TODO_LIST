@@ -25,6 +25,7 @@ import com.danis.android.todo_list.model.CaseTODO
 import com.danis.android.todo_list.model.getDate
 import com.danis.android.todo_list.viewModel.TODOViewModel
 import com.google.android.material.snackbar.Snackbar
+import java.text.SimpleDateFormat
 import java.util.*
 
 private const val DATE_PICKER_DIALOG_TAG = "DATE_PICKER_DIALOG_TAG"
@@ -51,6 +52,7 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.setItemViewCacheSize(100)
+        setDateTextView(currentDate)
         return binding.root
     }
 
@@ -139,6 +141,12 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback {
     override fun onDateSelected(date: Date) {
         currentDate = date
         todoViewModel.loadTODOList(date)
+        setDateTextView(currentDate)
+    }
+    fun setDateTextView(date:Date){
+        val formatter = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.getDefault())
+        val string_date = formatter.format(date)
+        binding.dateTextView.text = string_date
     }
 
     companion object {
