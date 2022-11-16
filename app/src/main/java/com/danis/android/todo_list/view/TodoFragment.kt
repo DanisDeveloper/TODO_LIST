@@ -57,6 +57,8 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback {
             TODOList = list
             adapter = Adapter(TODOList)
             binding.recyclerView.adapter = adapter
+            if(TODOList.isEmpty()) binding.taskNotFoundImageView.visibility = View.VISIBLE
+            else binding.taskNotFoundImageView.visibility = View.GONE
         })
     }
 

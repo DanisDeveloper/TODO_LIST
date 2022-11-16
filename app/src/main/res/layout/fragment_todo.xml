@@ -71,5 +71,18 @@
             app:srcCompat="@drawable/ic_calendar"
             app:tint="@color/white" />
 
+        <ImageView
+            android:id="@+id/task_not_found_imageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recyclerView"
+            app:layout_constraintVertical_bias="0.39"
+            app:srcCompat="@drawable/nothing_found"
+            tools:visibility="visible" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

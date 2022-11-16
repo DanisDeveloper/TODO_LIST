@@ -40,6 +40,8 @@ class NotesFragment : Fragment() {
         notesViewModel.notesListLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer { list->
             adapter = Adapter(list)
             binding.recyclerView.adapter = adapter
+            if(list.isEmpty()) binding.notesNotFoundImageView.visibility = View.VISIBLE
+            else binding.notesNotFoundImageView.visibility = View.GONE
         })
     }
 
