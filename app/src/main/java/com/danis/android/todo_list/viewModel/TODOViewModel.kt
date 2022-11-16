@@ -17,15 +17,14 @@ class TODOViewModel:ViewModel() {
     val todoListLiveData:LiveData<List<CaseTODO>> = Transformations.switchMap(dateLiveData){
         repository.getTODOList(it)
     }
-
     fun loadTODOList(date:Date){
         dateLiveData.value = date
     }
-    fun onClickAddButton(){
-        repository.insertTODO(CaseTODO())
+    fun onClickAddButton(date: Date){
+        repository.insertTODO(CaseTODO(date=date))
     }
-
     fun saveTODOList(list:List<CaseTODO>){
         repository.updateTODO(list)
     }
+
 }

@@ -26,7 +26,6 @@ class DatePickerFragment:DialogFragment() {
             targetFragment?.let {
                 (it as Callback).onDateSelected(resultDate)
             }
-
         }
         return DatePickerDialog(requireContext(),android.R.style.ThemeOverlay_Material_Dialog_Alert ,dateListener,init_year,init_month,init_day)
     }

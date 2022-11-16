@@ -14,6 +14,8 @@ interface DAO {
     @Query("SELECT * FROM CaseTODO WHERE date=(:date)")
     fun getTODOList(date:Date):LiveData<List<CaseTODO>>
 
+
+
     @Insert
     fun insertTODO(case:CaseTODO)
 
@@ -26,6 +28,9 @@ interface DAO {
 
     @Query("SELECT * FROM CaseNotes WHERE id=(:id)")
     fun getNote(id:UUID):LiveData<CaseNotes?>
+
+    @Query("SELECT * FROM CaseNotes WHERE Title LIKE (:searchQuery)")
+    fun getNotesListLIKE(searchQuery:String):LiveData<List<CaseNotes>>
 
     @Insert
     fun insertNotes(case:CaseNotes)

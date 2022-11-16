@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,11 @@ class NotesFragment : Fragment() {
     private var adapter = Adapter(emptyList())
     private val notesViewModel:NotesViewModel by lazy{
         ViewModelProvider(this).get(NotesViewModel::class.java)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        notesViewModel.searchNotes("")
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +57,15 @@ class NotesFragment : Fragment() {
             notesViewModel.onClickAddButton(temp_case)
             startNote(temp_case.id)
         }
+        binding.notesSearchView.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                notesViewModel.searchNotes(newText?:"")
+                return true
+            }
+        })
     }
 
     private inner class Holder(view:View): RecyclerView.ViewHolder(view){

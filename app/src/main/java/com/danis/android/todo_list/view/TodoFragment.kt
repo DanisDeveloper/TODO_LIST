@@ -9,7 +9,9 @@ import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.TextView
+import androidx.databinding.adapters.TextViewBindingAdapter.setText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -35,10 +37,11 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback {
     private val todoViewModel:TODOViewModel by lazy {
         ViewModelProvider(this).get(TODOViewModel::class.java)
     }
+    private var currentDate:Date = getDate()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        todoViewModel.loadTODOList(getDate())
+        todoViewModel.loadTODOList(currentDate)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,7 +69,7 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback {
         super.onResume()
         binding.addButton.setOnClickListener {
             todoViewModel.saveTODOList(TODOList)
-            todoViewModel.onClickAddButton()
+            todoViewModel.onClickAddButton(currentDate)
         }
         binding.calendarButton.setOnClickListener {
             todoViewModel.saveTODOList(TODOList)
@@ -89,13 +92,13 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback {
         fun bind(case:CaseTODO){
             val index = TODOList.indexOfFirst { it.id==case.id }
             binding.checkBox.isChecked = TODOList[index].isSolved
-            binding.textView.setText(TODOList[index].todo, TextView.BufferType.EDITABLE)
+            binding.taskEditText.setText(TODOList[index].todo, TextView.BufferType.EDITABLE)
             checkForStrike(binding.checkBox.isChecked)
             binding.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
                 TODOList[index].isSolved = isChecked
                 checkForStrike(isChecked)
             }
-            binding.textView.addTextChangedListener(object :TextWatcher{
+            binding.taskEditText.addTextChangedListener(object :TextWatcher{
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     TODOList[index].todo = s.toString()
@@ -104,23 +107,22 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback {
 
             })
             itemView.setOnClickListener {
-                Snackbar.make(view!!,binding.textView.text.toString(),Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(view!!,binding.taskEditText.text.toString(),Snackbar.LENGTH_SHORT).show()
             }
         }
        private fun checkForStrike(isChecked:Boolean){
-           if(isChecked) strike(binding.textView.text.toString())
-           else unstrike(binding.textView.text.toString())
+           if(isChecked) strike(binding.taskEditText.text.toString())
+           else unstrike(binding.taskEditText.text.toString())
        }
         private fun strike(str:String){
             val STRIKE_THROUGH_SPAN = StrikethroughSpan()
-            binding.textView.setText(str,TextView.BufferType.SPANNABLE)
-            val spannable:Spannable = binding.textView.text
-            spannable.setSpan(STRIKE_THROUGH_SPAN,0,binding.textView.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            binding.taskEditText.setText(str,TextView.BufferType.SPANNABLE)
+            val spannable:Spannable = binding.taskEditText.text
+            spannable.setSpan(STRIKE_THROUGH_SPAN,0,binding.taskEditText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         private fun unstrike(str:String){
-            binding.textView.setText(str,TextView.BufferType.NORMAL)
+            binding.taskEditText.setText(str,TextView.BufferType.NORMAL)
         }
-
     }
 
     private inner class Adapter(val list:List<CaseTODO>):RecyclerView.Adapter<Holder>(){
@@ -135,6 +137,7 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback {
     }
 
     override fun onDateSelected(date: Date) {
+        currentDate = date
         todoViewModel.loadTODOList(date)
     }
 
