@@ -9,4 +9,7 @@
     <string name="hint_task">Task</string>
     <string name="hint_title">Title</string>
     <string name="hint_content">Content</string>
+    <string name="delete_text_view">Delete?</string>
+    <string name="no_button">No</string>
+    <string name="yes_button">Yes</string>
 </resources>

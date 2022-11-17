@@ -29,6 +29,11 @@ class Repository(context:Context) {
             DAO.updateTODO(list)
         }
     }
+    fun deleteTODO(case:CaseTODO){
+        executor.execute{
+            DAO.deleteTODO(case)
+        }
+    }
 
     fun getNotesList():LiveData<List<CaseNotes>> = DAO.getNotesList()
     fun getNote(id:UUID):LiveData<CaseNotes?> = DAO.getNote(id)

@@ -26,5 +26,8 @@ class TODOViewModel:ViewModel() {
     fun saveTODOList(list:List<CaseTODO>){
         repository.updateTODO(list)
     }
+    fun deleteTodo(case:CaseTODO){
+        repository.deleteTODO(case)
+    }
 
 }

@@ -11,11 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.adapters.TextViewBindingAdapter.setText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.danis.android.todo_list.R
@@ -30,8 +32,10 @@ import java.util.*
 
 private const val DATE_PICKER_DIALOG_TAG = "DATE_PICKER_DIALOG_TAG"
 private const val DATE_PICKER_DIALOG_REQUEST_CODE = 0
+private const val CHOICE_DIALOG_TAG = "CHOICE_DIALOG_TAG"
+private const val CHOICE_DIALOG_REQUEST_CODE = 1
 
-class TodoFragment : Fragment(),DatePickerFragment.Callback {
+class TodoFragment : Fragment(),DatePickerFragment.Callback,ChoiceDialogFragment.CallBack {
     private lateinit var binding:FragmentTodoBinding
     private  var adapter = Adapter(emptyList())
     private var TODOList:List<CaseTODO> = emptyList()
@@ -39,6 +43,7 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback {
         ViewModelProvider(this).get(TODOViewModel::class.java)
     }
     private var currentDate:Date = getDate()
+    private var currentCase  = CaseTODO()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +57,24 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.setItemViewCacheSize(100)
+        val simpleCallback = object :ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN,0){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                val startPosition = viewHolder.adapterPosition
+                val endPosition = target.adapterPosition
+                Collections.swap(TODOList,startPosition,endPosition)
+                adapter.notifyItemMoved(startPosition,endPosition)
+                return false
+            }
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                TODO("Not yet implemented")
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(simpleCallback)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
         setDateTextView(currentDate)
         return binding.root
     }
@@ -108,8 +131,16 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback {
                 override fun afterTextChanged(s: Editable?) {}
 
             })
-            itemView.setOnClickListener {
-                Snackbar.make(view!!,binding.taskEditText.text.toString(),Snackbar.LENGTH_SHORT).show()
+            binding.moveImageView.setOnLongClickListener {
+                activity?.let {
+                    ChoiceDialogFragment.newInstance().apply {
+                        setTargetFragment(this@TodoFragment,CHOICE_DIALOG_REQUEST_CODE)
+                        show(it.supportFragmentManager,CHOICE_DIALOG_TAG)
+                    }
+                }
+                currentCase = case
+                todoViewModel.saveTODOList(TODOList)
+                true
             }
         }
        private fun checkForStrike(isChecked:Boolean){
@@ -155,6 +186,10 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback {
 
             }
         }
+    }
+
+    override fun onButtonClick(choice: Boolean) {
+        if(choice) todoViewModel.deleteTodo(currentCase)
     }
 
 
