@@ -1,6 +1,5 @@
 package com.danis.android.todo_list.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -8,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.danis.android.todo_list.model.CaseTODO
 import com.danis.android.todo_list.model.Repository
 import com.danis.android.todo_list.model.getDate
-import com.danis.android.todo_list.view.DatePickerFragment
 import java.util.*
 
 class TODOViewModel:ViewModel() {
@@ -17,6 +15,8 @@ class TODOViewModel:ViewModel() {
     val todoListLiveData:LiveData<List<CaseTODO>> = Transformations.switchMap(dateLiveData){
         repository.getTODOList(it)
     }
+    var currentDate:Date = getDate()
+
     fun loadTODOList(date:Date){
         dateLiveData.value = date
     }

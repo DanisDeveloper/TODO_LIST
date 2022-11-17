@@ -11,4 +11,5 @@
     <string name="delete_text_view">Удалить?</string>
     <string name="no_button">Нет</string>
     <string name="yes_button">Да</string>
+    <string name="limit">Максимум задач: 100</string>
 </resources>

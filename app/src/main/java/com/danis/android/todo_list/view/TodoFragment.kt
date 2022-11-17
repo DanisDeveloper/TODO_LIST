@@ -43,12 +43,11 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback,ChoiceDialogFragment
     private val todoViewModel:TODOViewModel by lazy {
         ViewModelProvider(this).get(TODOViewModel::class.java)
     }
-    private var currentDate:Date = getDate()
     private var currentCase  = CaseTODO()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        todoViewModel.loadTODOList(currentDate)
+        todoViewModel.loadTODOList(todoViewModel.currentDate)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,7 +77,7 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback,ChoiceDialogFragment
         }
         val itemTouchHelper = ItemTouchHelper(simpleCallback)
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
-        setDateTextView(currentDate)
+        setDateTextView(todoViewModel.currentDate)
         return binding.root
     }
 
@@ -97,7 +96,10 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback,ChoiceDialogFragment
         super.onResume()
         binding.addButton.setOnClickListener {
             todoViewModel.saveTODOList(TODOList)
-            todoViewModel.onClickAddButton(currentDate,TODOList.size)
+            if(TODOList.size<100)
+                todoViewModel.onClickAddButton(todoViewModel.currentDate,TODOList.size)
+            else
+                Snackbar.make(binding.root,R.string.limit,Snackbar.LENGTH_SHORT).show()
         }
         binding.calendarButton.setOnClickListener {
             todoViewModel.saveTODOList(TODOList)
@@ -172,9 +174,9 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback,ChoiceDialogFragment
     }
 
     override fun onDateSelected(date: Date) {
-        currentDate = date
+        todoViewModel.currentDate = date
         todoViewModel.loadTODOList(date)
-        setDateTextView(currentDate)
+        setDateTextView(todoViewModel.currentDate)
     }
 
     fun setDateTextView(date:Date){
