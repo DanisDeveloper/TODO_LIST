@@ -2,8 +2,6 @@
     <string name="app_name">Notepad</string>
     <string name="TODO">TODO</string>
     <string name="Notes">Notes</string>
-    <string name="calendar">Calendar</string>
-    <string name="add_task">Add</string>
     <string name="search_todo_hint">search task</string>
     <string name="search_notes_hint">search notes</string>
     <string name="hint_task">Task</string>

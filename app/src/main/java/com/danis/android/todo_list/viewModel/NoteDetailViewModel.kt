@@ -17,10 +17,8 @@ class NoteDetailViewModel:ViewModel() {
     fun loadNote(id:UUID){
         noteId.value = id
     }
-    fun saveNote(case:CaseNotes){
-        repository.insertNotes(case)
-    }
     fun updateNote(case:CaseNotes){
-        repository.updateNotes(case)
+        repository.updateNote(case)
     }
+
 }

@@ -41,7 +41,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:maxImageSize="36dp"
             app:srcCompat="@drawable/ic_add"
-            app:tint="@color/white" />
+            app:tint="@color/tint_color" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/calendarButton"
@@ -55,7 +55,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:maxImageSize="36dp"
             app:srcCompat="@drawable/ic_calendar"
-            app:tint="@color/white" />
+            app:tint="@color/tint_color" />
 
         <ImageView
             android:id="@+id/task_not_found_imageView"
@@ -68,7 +68,8 @@
             app:layout_constraintTop_toTopOf="@+id/recyclerView"
             app:layout_constraintVertical_bias="0.39"
             app:srcCompat="@drawable/nothing_found"
-            tools:visibility="visible" />
+            tools:visibility="visible"
+            app:tint="?attr/colorPrimary"/>
 
         <TextView
             android:id="@+id/date_textView"
@@ -78,11 +79,11 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/corner_32dp"
-            android:backgroundTint="@color/grey"
+            android:backgroundTint="@color/item_background"
             android:gravity="center"
             android:minHeight="48dp"
             android:text="TextView"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/calendarButton"
             app:layout_constraintStart_toStartOf="parent"

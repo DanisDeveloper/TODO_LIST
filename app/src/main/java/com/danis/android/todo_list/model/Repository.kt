@@ -35,7 +35,6 @@ class Repository(context:Context) {
         }
     }
 
-    fun getNotesList():LiveData<List<CaseNotes>> = DAO.getNotesList()
     fun getNote(id:UUID):LiveData<CaseNotes?> = DAO.getNote(id)
     fun getNotesListLIKE(searchQuery:String):LiveData<List<CaseNotes>> = DAO.getNotesListLIKE(searchQuery)
     fun insertNotes(case:CaseNotes) {
@@ -43,9 +42,19 @@ class Repository(context:Context) {
             DAO.insertNotes(case)
         }
     }
-    fun updateNotes(case:CaseNotes) {
+    fun updateNote(case:CaseNotes) {
         executor.execute{
-            DAO.updateNotes(case)
+            DAO.updateNote(case)
+        }
+    }
+    fun updateNotes(list:List<CaseNotes>){
+        executor.execute{
+            DAO.updateNotes(list)
+        }
+    }
+    fun deleteNote(case:CaseNotes){
+        executor.execute{
+            DAO.deleteNote(case)
         }
     }
 

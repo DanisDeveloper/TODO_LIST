@@ -20,8 +20,8 @@ class TODOViewModel:ViewModel() {
     fun loadTODOList(date:Date){
         dateLiveData.value = date
     }
-    fun onClickAddButton(date: Date){
-        repository.insertTODO(CaseTODO(date=date))
+    fun onClickAddButton(date: Date,position:Int){
+        repository.insertTODO(CaseTODO(date=date, position = position))
     }
     fun saveTODOList(list:List<CaseTODO>){
         repository.updateTODO(list)

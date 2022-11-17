@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.ViewCompat
 import androidx.databinding.adapters.TextViewBindingAdapter.setText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -66,6 +67,8 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback,ChoiceDialogFragment
                 val startPosition = viewHolder.adapterPosition
                 val endPosition = target.adapterPosition
                 Collections.swap(TODOList,startPosition,endPosition)
+                TODOList[startPosition].position = startPosition
+                TODOList[endPosition].position = endPosition
                 adapter.notifyItemMoved(startPosition,endPosition)
                 return false
             }
@@ -94,7 +97,7 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback,ChoiceDialogFragment
         super.onResume()
         binding.addButton.setOnClickListener {
             todoViewModel.saveTODOList(TODOList)
-            todoViewModel.onClickAddButton(currentDate)
+            todoViewModel.onClickAddButton(currentDate,TODOList.size)
         }
         binding.calendarButton.setOnClickListener {
             todoViewModel.saveTODOList(TODOList)
@@ -131,7 +134,7 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback,ChoiceDialogFragment
                 override fun afterTextChanged(s: Editable?) {}
 
             })
-            binding.moveImageView.setOnLongClickListener {
+            binding.deleteImageView.setOnClickListener {
                 activity?.let {
                     ChoiceDialogFragment.newInstance().apply {
                         setTargetFragment(this@TodoFragment,CHOICE_DIALOG_REQUEST_CODE)
@@ -140,7 +143,6 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback,ChoiceDialogFragment
                 }
                 currentCase = case
                 todoViewModel.saveTODOList(TODOList)
-                true
             }
         }
        private fun checkForStrike(isChecked:Boolean){
@@ -174,10 +176,21 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback,ChoiceDialogFragment
         todoViewModel.loadTODOList(date)
         setDateTextView(currentDate)
     }
+
     fun setDateTextView(date:Date){
         val formatter = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.getDefault())
         val string_date = formatter.format(date)
         binding.dateTextView.text = string_date
+    }
+
+    override fun onButtonClick(choice: Boolean) {
+        if(choice){
+            todoViewModel.deleteTodo(currentCase)
+            for(elem in currentCase.position until TODOList.size){
+                TODOList[elem].position--
+            }
+            todoViewModel.saveTODOList(TODOList)
+        }
     }
 
     companion object {
@@ -187,10 +200,4 @@ class TodoFragment : Fragment(),DatePickerFragment.Callback,ChoiceDialogFragment
             }
         }
     }
-
-    override fun onButtonClick(choice: Boolean) {
-        if(choice) todoViewModel.deleteTodo(currentCase)
-    }
-
-
 }

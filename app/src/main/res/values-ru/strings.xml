@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Блокнот</string>
+    <string name="TODO">Дела</string>
+    <string name="Notes">Заметки</string>
+    <string name="search_todo_hint">Поиск задачи</string>
+    <string name="search_notes_hint">Поиск заметки</string>
+    <string name="hint_task">Задача</string>
+    <string name="hint_title">Заголовок</string>
+    <string name="hint_content">Содержание</string>
+    <string name="delete_text_view">Удалить?</string>
+    <string name="no_button">Нет</string>
+    <string name="yes_button">Да</string>
+</resources>

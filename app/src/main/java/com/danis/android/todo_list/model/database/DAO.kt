@@ -8,7 +8,7 @@ import java.util.*
 
 @Dao
 interface DAO {
-    @Query("SELECT * FROM CaseTODO WHERE date=(:date)")
+    @Query("SELECT * FROM CaseTODO WHERE date=(:date) ORDER BY position")
     fun getTODOList(date:Date):LiveData<List<CaseTODO>>
 
     @Insert
@@ -21,18 +21,22 @@ interface DAO {
     fun deleteTODO(case:CaseTODO)
 
 
-    @Query("SELECT * FROM CaseNotes")
-    fun getNotesList():LiveData<List<CaseNotes>>
-
     @Query("SELECT * FROM CaseNotes WHERE id=(:id)")
     fun getNote(id:UUID):LiveData<CaseNotes?>
 
-    @Query("SELECT * FROM CaseNotes WHERE Title LIKE (:searchQuery)")
+    @Query("SELECT * FROM CaseNotes WHERE Title LIKE (:searchQuery) ORDER BY position")
     fun getNotesListLIKE(searchQuery:String):LiveData<List<CaseNotes>>
 
     @Insert
     fun insertNotes(case:CaseNotes)
 
     @Update
-    fun updateNotes(case: CaseNotes)
+    fun updateNote(case: CaseNotes)
+
+    @Update
+    fun updateNotes(list:List<CaseNotes>)
+
+    @Delete
+    fun deleteNote(case:CaseNotes)
+
 }

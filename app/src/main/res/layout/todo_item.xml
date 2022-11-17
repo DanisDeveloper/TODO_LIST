@@ -12,7 +12,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/corner_16dp"
-        android:backgroundTint="@color/grey"
+        android:backgroundTint="@color/item_background"
         android:orientation="vertical">
 
         <EditText
@@ -33,7 +33,7 @@
             android:textColorHint="@color/hint"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/move_imageView"
+            app:layout_constraintEnd_toStartOf="@+id/delete_imageView"
             app:layout_constraintStart_toEndOf="@+id/checkBox"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,18 +46,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/move_imageView"
+            android:id="@+id/delete_imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
+            android:maxWidth="48dp"
             android:maxHeight="48dp"
+            android:padding="4dp"
             android:scaleType="centerCrop"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
-            android:tint="@color/orange"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_dehaze" />
+            app:srcCompat="@drawable/ic_cancel"
+            app:tint="?attr/colorPrimary" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

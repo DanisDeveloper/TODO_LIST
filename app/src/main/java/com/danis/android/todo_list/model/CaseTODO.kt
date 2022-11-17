@@ -8,4 +8,5 @@ import java.util.*
 data class CaseTODO(@PrimaryKey val id:UUID= UUID.randomUUID(),
                     var date:Date=getDate(),
                     var todo:String="",
-                    var isSolved:Boolean=false)
+                    var isSolved:Boolean=false,
+                    var position:Int = 0)

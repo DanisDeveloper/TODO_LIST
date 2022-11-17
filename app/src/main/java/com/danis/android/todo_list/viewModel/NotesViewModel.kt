@@ -19,4 +19,10 @@ class NotesViewModel: ViewModel() {
     fun searchNotes(searchQuery:String=""){
         searchString.value = "%${searchQuery}%"
     }
+    fun saveNotesList(list:List<CaseNotes>){
+        repository.updateNotes(list)
+    }
+    fun deleteNote(case:CaseNotes){
+        repository.deleteNote(case)
+    }
 }
