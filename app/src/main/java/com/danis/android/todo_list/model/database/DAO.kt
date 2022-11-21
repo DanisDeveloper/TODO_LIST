@@ -15,7 +15,7 @@ interface DAO {
     fun insertTODO(case:CaseTODO)
 
     @Update
-    fun updateTODO(list:List<CaseTODO>)
+    fun updateTODOList(list:List<CaseTODO>)
 
     @Delete
     fun deleteTODO(case:CaseTODO)
