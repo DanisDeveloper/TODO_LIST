@@ -7,7 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="main_application_color">#FF8800</color>
+
+    <color name="orange">#FF8800</color>
+
+    <color name="green">#76FF03</color>
     <color name="item_background">#DDDDDD</color>
     <color name="hint">#606060</color>
     <color name="text_color">#000000</color>

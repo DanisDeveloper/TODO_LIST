@@ -16,12 +16,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
         viewPagerAdapter = ViewPagerAdapter(this,fragmentList)
         binding.viewPager.adapter = viewPagerAdapter
         TabLayoutMediator(binding.tabLayout,binding.viewPager){ tab,position ->
             tab.text = getString(fragmentListTitles[position])
         }.attach()
-
+        //TODO уведомление для перезапуска программы чтобы поменять тему
+       // setTheme(R.style.Theme_TODO_LIST_green)
     }
 }
