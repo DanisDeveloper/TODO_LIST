@@ -84,10 +84,7 @@ class TodoFragment : Fragment(), DatePickerFragment.Callback, ChoiceDialogFragme
                     adapter.notifyItemMoved(startPosition, endPosition)
                     return false
                 }
-
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    TODO("Not yet implemented")
-                }
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {}
             }
         val itemTouchHelper = ItemTouchHelper(simpleCallback)
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
@@ -160,20 +157,11 @@ class TodoFragment : Fragment(), DatePickerFragment.Callback, ChoiceDialogFragme
                 checkForStrike(isChecked)
             }
             binding.taskEditText.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
-
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     TODOList[index].todo = s.toString()
                 }
-
                 override fun afterTextChanged(s: Editable?) {}
-
             })
             binding.deleteImageView.setOnClickListener {
                 activity?.let {
@@ -188,14 +176,10 @@ class TodoFragment : Fragment(), DatePickerFragment.Callback, ChoiceDialogFragme
             binding.notificationImageView.setOnClickListener {
 
                 if (case.notificationTime == null) {
-                    binding.notificationImageView.setColorFilter(
-                        context?.getResources()?.getColor(getIdColorPrimary())!!
-                    )
+                    binding.notificationImageView.setColorFilter(context?.getResources()?.getColor(getIdColorPrimary())!!)
                     showTimePicker(case)
                 } else {
-                    binding.notificationImageView.setColorFilter(
-                        context?.getResources()?.getColor(R.color.hint)!!
-                    )
+                    binding.notificationImageView.setColorFilter(context?.getResources()?.getColor(R.color.hint)!!)
                     cancelAlarm(case)
                 }
             }
@@ -278,9 +262,7 @@ class TodoFragment : Fragment(), DatePickerFragment.Callback, ChoiceDialogFragme
         private fun cancelAlarm(case: CaseTODO) {
             alarmManager =
                 activity?.getSystemService(AppCompatActivity.ALARM_SERVICE) as AlarmManager
-            val intent = Intent(context, AlarmReceiver::class.java).apply {
-                putExtra(CONTENT_TEXT_KEY, case.todo)
-            }
+            val intent = Intent(context, AlarmReceiver::class.java)
             pendingIntent = PendingIntent.getBroadcast(
                 context,
                 0,
@@ -312,7 +294,7 @@ class TodoFragment : Fragment(), DatePickerFragment.Callback, ChoiceDialogFragme
     }
 
     fun setDateTextView(date: Date) {
-        val formatter = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.getDefault())
+        val formatter = SimpleDateFormat("EEEE, dd.MM.yy", Locale.getDefault())
         val stringDate = formatter.format(date)
         binding.dateTextView.text = stringDate
     }
@@ -339,9 +321,9 @@ class TodoFragment : Fragment(), DatePickerFragment.Callback, ChoiceDialogFragme
         }
     }
 
-    fun getIdColorPrimary():Int{
+    fun getIdColorPrimary(): Int {
         val typedValue = TypedValue()
-        activity?.theme?.resolveAttribute(androidx.appcompat.R.attr.colorPrimary,typedValue,true)
+        activity?.theme?.resolveAttribute(androidx.appcompat.R.attr.colorPrimary, typedValue, true)
         val color = typedValue.resourceId
         return color
     }

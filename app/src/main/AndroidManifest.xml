@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_notes"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TODO_LIST"
+        android:theme="@style/Theme.TODO_LIST.orange"
         tools:targetApi="31">
         <activity
             android:name="com.danis.android.todo_list.view.NoteDetailActivity"
