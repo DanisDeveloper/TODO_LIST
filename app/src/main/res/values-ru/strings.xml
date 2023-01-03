@@ -12,4 +12,25 @@
     <string name="no_button">Нет</string>
     <string name="yes_button">Да</string>
     <string name="limit">Максимум задач: 100</string>
+    <string name="save">Сохранить</string>
+    <string name="notification">Уведомление</string>
+    <string name="date">Дата</string>
+    <string name="delete">Удалить</string>
+    <string name="cancel">Отменить</string>
+    <string name="snackBarDeleteTODO">Задача успешно удалена</string>
+    <string name="undo">Отменить</string>
+    <string name="channel_name">Push-ведомления</string>
+    <string name="date_dialog_task">Перенести задачу на другой день</string>
+    <string name="date_dialog">Выберите дату</string>
+    <string-array name="priority">
+        <item>Высокий</item>
+        <item>Средний</item>
+        <item>Низкий</item>
+        <item>Отсутствует</item>
+    </string-array>
+    <string name="snackBarDeleteNote">Заметка успешно удалена</string>
+    <string name="share">Поделиться</string>
+    <string name="redo">Восстановить</string>
+    <string name="share_via">Поделиться через</string>
+    <string name="time_picker">Выбор времени уведомления</string>
 </resources>

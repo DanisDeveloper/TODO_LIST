@@ -19,4 +19,9 @@
     <style name="TabLayoutStyle" parent="Base.TextAppearance.MaterialComponents.Button">
         <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="BottomSheetDialogTheme" parent="ThemeOverlay.Material3.DayNight.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
+    </style>
 </resources>

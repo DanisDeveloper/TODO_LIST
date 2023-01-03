@@ -9,8 +9,10 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="orange">#FF8800</color>
-    <color name="item_background">#DDDDDD</color>
+    <color name="item_enabled_background">#DDDDDD</color>
+    <color name="item_disabled_background">#AEAEAE</color>
     <color name="hint">#606060</color>
     <color name="text_color">#000000</color>
     <color name="tint_color">#FFFFFF</color>
+    <color name="toolbar_background">#FF8800</color>
 </resources>

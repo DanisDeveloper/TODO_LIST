@@ -11,4 +11,25 @@
     <string name="no_button">No</string>
     <string name="yes_button">Yes</string>
     <string name="limit">Limit of task: 100</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="notification">Notification</string>
+    <string name="date">Date</string>
+    <string name="cancel">Cancel</string>
+    <string name="snackBarDeleteTODO">Task is successfully deleted</string>
+    <string name="undo">Undo</string>
+    <string name="channel_name">Push-notifications</string>
+    <string name="date_dialog_task">Move a task to another day</string>
+    <string name="date_dialog">Select date</string>
+    <string-array name="priority">
+        <item>High</item>
+        <item>Medium</item>
+        <item>Low</item>
+        <item>None</item>
+    </string-array>
+    <string name="snackBarDeleteNote">Note is successfully deleted</string>
+    <string name="share">Share</string>
+    <string name="redo">Redo</string>
+    <string name="share_via">Share via</string>
+    <string name="time_picker">TIME PICKER</string>
 </resources>

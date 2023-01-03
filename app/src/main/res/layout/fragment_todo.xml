@@ -1,100 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
 
-    <data>
-        <variable
-            name="viewModel"
-            type="com.danis.android.todo_list.viewModel.TODOViewModel" />
-    </data>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_textView"
+        tools:listitem="@layout/todo_item">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:maxHeight="48dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:scaleX="0.9"
+        android:scaleY="0.9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxImageSize="36dp"
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@color/tint_color" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/calendarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:maxHeight="48dp"
+        android:minHeight="48dp"
+        android:scaleX="0.9"
+        android:scaleY="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxImageSize="36dp"
+        app:srcCompat="@drawable/ic_calendar"
+        app:tint="@color/tint_color" />
+
+    <ImageView
+        android:id="@+id/task_not_found_imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/recyclerView"
+        app:layout_constraintVertical_bias="0.39"
+        app:srcCompat="@drawable/nothing_found"
+        app:tint="?attr/colorPrimary"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/date_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/corner_32dp"
+        android:backgroundTint="@color/item_enabled_background"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:text="TextView"
+        android:textColor="@color/text_color"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/addButton"
+        app:layout_constraintStart_toEndOf="@+id/calendarButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".view.TodoFragment">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/date_textView">
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:maxHeight="48dp"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            android:scaleX="0.9"
-            android:scaleY="0.9"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:maxImageSize="36dp"
-            app:srcCompat="@drawable/ic_add"
-            app:tint="@color/tint_color" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/calendarButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:maxHeight="48dp"
-            android:minHeight="48dp"
-            android:scaleX="0.9"
-            android:scaleY="0.9"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:maxImageSize="36dp"
-            app:srcCompat="@drawable/ic_calendar"
-            app:tint="@color/tint_color" />
-
-        <ImageView
-            android:id="@+id/task_not_found_imageView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
-            app:layout_constraintEnd_toEndOf="@+id/recyclerView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/recyclerView"
-            app:layout_constraintVertical_bias="0.39"
-            app:srcCompat="@drawable/nothing_found"
-            tools:visibility="visible"
-            app:tint="?attr/colorPrimary"/>
-
-        <TextView
-            android:id="@+id/date_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/corner_32dp"
-            android:backgroundTint="@color/item_background"
-            android:gravity="center"
-            android:minHeight="48dp"
-            android:text="TextView"
-            android:textColor="@color/text_color"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/addButton"
-            app:layout_constraintStart_toEndOf="@+id/calendarButton"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>

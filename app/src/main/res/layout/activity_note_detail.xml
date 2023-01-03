@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:minHeight="48dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.NoteDetailActivity">
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/toolbar_background">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/note_detail_toolbar"
+                app:navigationIcon="@drawable/ic_back_arrow" />
+        </com.google.android.material.appbar.AppBarLayout>
 
         <EditText
             android:id="@+id/titleEditText"
@@ -17,12 +33,13 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/corner_16dp"
-            android:backgroundTint="@color/item_background"
+            android:backgroundTint="@color/item_enabled_background"
+            android:maxLength="90"
+            android:maxLines="6"
             android:ems="10"
             android:hint="@string/hint_title"
             android:inputType="textMultiLine|textPersonName"
-            android:maxLines="5"
-            android:minHeight="48dp"
+            android:minHeight="60dp"
             android:padding="8dp"
             android:textColorHint="@color/hint"
             android:textSize="24sp"
@@ -32,14 +49,14 @@
 
         <EditText
             android:id="@+id/contentEditText"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/corner_16dp"
-            android:backgroundTint="@color/item_background"
+            android:backgroundTint="@color/item_enabled_background"
             android:ems="10"
             android:gravity="top|left"
             android:hint="@string/hint_content"
@@ -54,6 +71,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleEditText"
             app:layout_constraintVertical_bias="0.0" />
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
