@@ -10,11 +10,8 @@ import java.util.*
 class NotesViewModel(application: Application): AndroidViewModel(application) {
     private val repository = RepositoryImpl(application)
     private val getNoteListUseCase = GetNoteListUseCase(repository)
-    private val getNoteItemUseCase = GetNoteItemUseCase(repository)
     private val insertNoteItemUseCase = InsertNoteItemUseCase(repository)
     private val deleteNoteItemUseCase = DeleteNoteItemUseCase(repository)
-    private val updateNoteItemUseCase = UpdateNoteItemUseCase(repository)
-    private val updateNoteListUseCase = UpdateNoteListUseCase(repository)
 
     private var _searchStringLiveData = MutableLiveData<String>()
     val searchStringLiveData:LiveData<String>
