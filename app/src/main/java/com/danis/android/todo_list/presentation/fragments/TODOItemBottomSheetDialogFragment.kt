@@ -83,14 +83,13 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 DATE_PICKER_DIALOG_TAG
             )
             datePicker.addOnPositiveButtonClickListener {
-                outCaseTODO.date = getDate(it).time
                 if(outCaseTODO.notificationTime !=null){
-                    val notificationTime = getTime(outCaseTODO.notificationTime!!)
+                    val notificationTime = outCaseTODO.notificationTime!! - getDate(outCaseTODO.date).time
                     cancelAlarm(outCaseTODO)
-                    outCaseTODO.notificationTime = notificationTime + outCaseTODO.date
+                    outCaseTODO.notificationTime = notificationTime + getDate(it).time
                     setAlarm(outCaseTODO)
                 }
-                outCaseTODO.position = 0
+                outCaseTODO.date = getDate(it).time
                 binding.dateTextView.text = getFormattedDate(it)
             }
         }
@@ -188,14 +187,7 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         return GregorianCalendar(year, month, day, 0, 0, 0).time
     }
-    private fun getTime(date: Long): Long {
-        val calendar = Calendar.getInstance()
-        calendar.time = Date(date)
-        calendar.get(Calendar.DATE)
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE)
-        return GregorianCalendar(0, 0, 0, hour, minute, 0).time.time
-    }
+
 
     private fun hideKeyboard(activity: Activity) {
         val imm: InputMethodManager =
