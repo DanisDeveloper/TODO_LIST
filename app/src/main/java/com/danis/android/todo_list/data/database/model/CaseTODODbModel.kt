@@ -10,7 +10,7 @@ data class CaseTODODbModel(
     var date: Long,
     var todo: String,
     var isSolved: Boolean,
-    var position: Int,
+    var priority: Int,
     var notificationTime: Long?,
     var notificationId:Int?
 )

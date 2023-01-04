@@ -7,7 +7,7 @@ import com.danis.android.todo_list.data.database.model.CaseTODODbModel
 
 @Dao
 interface DAO {
-    @Query("SELECT * FROM CaseTODODbModel WHERE date=(:date) ORDER BY position DESC")
+    @Query("SELECT * FROM CaseTODODbModel WHERE date=(:date) ORDER BY priority DESC")
     suspend fun getTODOList(date:Long): List<CaseTODODbModel>
 
     @Query("SELECT * FROM CaseTODODbModel WHERE id=(:id) LIMIT 1")
