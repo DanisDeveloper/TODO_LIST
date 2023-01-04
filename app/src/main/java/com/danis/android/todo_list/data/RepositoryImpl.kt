@@ -44,10 +44,6 @@ class RepositoryImpl(application: Application) : Repository {
         DAO.deleteTODO(mapper.mapCaseTODOToCaseTODODbModel(caseTODO))
     }
 
-    override suspend fun getNoteItem(noteId: String): CaseNote {
-        return mapper.mapCaseNoteDbModelToCaseNote(DAO.getNote(noteId))
-    }
-
     override suspend fun getNoteList(searchQuery: String): List<CaseNote> {
         return DAO.getNotesListLIKE(searchQuery).map {
             mapper.mapCaseNoteDbModelToCaseNote(it)
@@ -62,11 +58,6 @@ class RepositoryImpl(application: Application) : Repository {
         DAO.updateNote(mapper.mapCaseNoteToCaseNoteDbModel(caseNote))
     }
 
-    override suspend fun updateNoteList(list: List<CaseNote>) {
-        DAO.updateNotes(list.map {
-            mapper.mapCaseNoteToCaseNoteDbModel(it)
-        })
-    }
 
     override suspend fun deleteNoteItem(caseNote: CaseNote) {
         DAO.deleteNote(mapper.mapCaseNoteToCaseNoteDbModel(caseNote))

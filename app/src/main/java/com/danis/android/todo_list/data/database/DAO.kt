@@ -26,8 +26,6 @@ interface DAO {
     suspend fun deleteTODO(case: CaseTODODbModel)
 
 
-    @Query("SELECT * FROM CaseNoteDbModel WHERE id=(:id) LIMIT 1")
-    suspend fun getNote(id:String): CaseNoteDbModel
 
     @Query("SELECT * FROM CaseNoteDbModel WHERE title LIKE (:searchQuery) ORDER BY position")
     suspend fun getNotesListLIKE(searchQuery:String):List<CaseNoteDbModel>
@@ -37,9 +35,6 @@ interface DAO {
 
     @Update
     suspend fun updateNote(case: CaseNoteDbModel)
-
-    @Update
-    suspend fun updateNotes(list:List<CaseNoteDbModel>)
 
     @Delete
     suspend fun deleteNote(case: CaseNoteDbModel)
