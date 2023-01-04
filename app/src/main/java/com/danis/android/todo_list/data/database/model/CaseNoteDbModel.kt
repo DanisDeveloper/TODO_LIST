@@ -6,9 +6,8 @@ import java.util.*
 
 @Entity
 data class CaseNoteDbModel(
-    @PrimaryKey
-    val id: String = UUID.randomUUID().toString(),
     var title: String = "",
     var text: String = "",
-    var position: Int = 0
+    var position: Int = 0,
+    @PrimaryKey val id: String = UUID.randomUUID().toString()
 )

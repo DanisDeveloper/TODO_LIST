@@ -16,10 +16,10 @@ class Mapper {
     }
     fun mapCaseNoteToCaseNoteDbModel(caseNote:CaseNote):CaseNoteDbModel{
         return CaseNoteDbModel(
-            id = caseNote.id,
             title = caseNote.title,
             text = caseNote.text,
-            position = caseNote.position
+            position = caseNote.position,
+            id = caseNote.id
         )
     }
 
