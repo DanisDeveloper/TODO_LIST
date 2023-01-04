@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.danis.android.todo_list.R
 import com.danis.android.todo_list.databinding.TodoItemBinding
 import com.danis.android.todo_list.domain.TODO.CaseTODO
-import com.danis.android.todo_list.presentation.fragments.TODOItemBottomSheetDialogFragment
 
 class TODOViewHolder(
     val binding: TodoItemBinding
@@ -20,7 +19,7 @@ class TODOViewHolder(
         binding.taskEditText.text = caseTODO.todo
         checkForStrike(caseTODO.isSolved)
         checkBackground(caseTODO.isSolved)
-        checkPriority(caseTODO.position)
+        checkPriority(caseTODO.priority)
     }
 
     private fun checkForStrike(isChecked: Boolean) {

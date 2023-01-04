@@ -23,10 +23,10 @@
     <string name="date_dialog_task">Перенести задачу на другой день</string>
     <string name="date_dialog">Выберите дату</string>
     <string-array name="priority">
-        <item>Высокий</item>
-        <item>Средний</item>
-        <item>Низкий</item>
-        <item>Отсутствует</item>
+        <item>Высокий приоритет</item>
+        <item>Средний приоритет</item>
+        <item>Низкий приоритет</item>
+        <item>Без приоритета</item>
     </string-array>
     <string name="snackBarDeleteNote">Заметка успешно удалена</string>
     <string name="share">Поделиться</string>

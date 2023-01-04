@@ -29,7 +29,7 @@ class Mapper {
             date = CaseTODODbModel.date,
             todo = CaseTODODbModel.todo,
             isSolved = CaseTODODbModel.isSolved,
-            position = CaseTODODbModel.position,
+            priority = CaseTODODbModel.position,
             notificationTime = CaseTODODbModel.notificationTime,
             notificationId = CaseTODODbModel.notificationId
         )
@@ -40,7 +40,7 @@ class Mapper {
             date = caseTODO.date,
             todo = caseTODO.todo,
             isSolved = caseTODO.isSolved,
-            position = caseTODO.position,
+            position = caseTODO.priority,
             notificationTime = caseTODO.notificationTime,
             notificationId = caseTODO.notificationId
         )
