@@ -33,4 +33,5 @@
     <string name="redo">Восстановить</string>
     <string name="share_via">Поделиться через</string>
     <string name="time_picker">Выбор времени уведомления</string>
+    <string name="okey">Окей</string>
 </resources>

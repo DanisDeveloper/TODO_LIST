@@ -46,9 +46,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/contentEditText"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
@@ -57,20 +55,29 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/corner_16dp"
             android:backgroundTint="@color/item_enabled_background"
-            android:ems="10"
-            android:gravity="top|left"
-            android:hint="@string/hint_content"
-            android:inputType="textMultiLine|textPersonName"
-            android:minHeight="48dp"
-            android:padding="8dp"
-            android:scrollbars="vertical"
-            android:scrollHorizontally="false"
-            android:textColorHint="@color/hint"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleEditText"
-            app:layout_constraintVertical_bias="0.0" />
+            android:scrollbars="none">
+
+            <EditText
+                android:id="@+id/contentEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:ems="10"
+                android:gravity="top|left"
+                android:hint="@string/hint_content"
+                android:inputType="textMultiLine|textPersonName"
+                android:minHeight="48dp"
+                android:padding="8dp"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="false"
+                android:textColorHint="@color/hint"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleEditText"
+                app:layout_constraintVertical_bias="0.0" />
+        </ScrollView>
+
     </LinearLayout>
 
 

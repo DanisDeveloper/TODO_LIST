@@ -223,7 +223,6 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-
     private fun setAlarm(case: CaseTODO) {
         val alarmManager = activity?.getSystemService(AppCompatActivity.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java).apply {

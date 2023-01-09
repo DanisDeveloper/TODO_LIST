@@ -75,6 +75,12 @@ class NoteDetailActivity : AppCompatActivity() {
         }
         binding.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
+                R.id.okay ->{
+                    binding.titleEditText.isEnabled = false
+                    binding.titleEditText.isEnabled = true
+                    binding.contentEditText.isEnabled = false
+                    binding.contentEditText.isEnabled = true
+                }
                 R.id.undo -> {
                     if (noteDetailViewModel.inCaseNote != noteDetailViewModel.outCaseNote)
                         noteDetailViewModel.savedCaseNote = noteDetailViewModel.outCaseNote.copy()
