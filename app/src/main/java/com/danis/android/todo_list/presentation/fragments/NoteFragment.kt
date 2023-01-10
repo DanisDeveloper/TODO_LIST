@@ -25,7 +25,7 @@ import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
 
-class NotesFragment : Fragment() {
+class NoteFragment : Fragment() {
     private var _binding: FragmentNoteBinding? = null
     private val binding: FragmentNoteBinding
         get() = _binding ?: throw RuntimeException("FragmentNoteBinding == null")
@@ -99,6 +99,7 @@ class NotesFragment : Fragment() {
 
     private fun setupClickListeners() {
         noteAdapter.onItemClickListener = {
+            binding.notesSearchView.clearFocus()
             launcher?.launch(NoteDetailActivity.newIntent(requireActivity(), it))
         }
     }
@@ -144,6 +145,7 @@ class NotesFragment : Fragment() {
         binding.addButton.setOnClickListener {
             val caseNote = noteViewModel.getNewNote()
             noteViewModel.insertNote(caseNote)
+            binding.notesSearchView.clearFocus()
             launcher?.launch(NoteDetailActivity.newIntent(requireActivity(), caseNote))
         }
         binding.notesSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -164,7 +166,7 @@ class NotesFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = NotesFragment().apply {
+        fun newInstance() = NoteFragment().apply {
             arguments = Bundle().apply {
 
             }
