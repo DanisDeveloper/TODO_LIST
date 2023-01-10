@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Notepad</string>
-    <string name="TODO">TODO</string>
+    <string name="todo">TODO</string>
     <string name="Notes">Notes</string>
     <string name="search_todo_hint">search task</string>
     <string name="search_notes_hint">search notes</string>
@@ -16,7 +16,7 @@
     <string name="notification">Notification</string>
     <string name="date">Date</string>
     <string name="cancel">Cancel</string>
-    <string name="snackBarDeleteTODO">Task is successfully deleted</string>
+    <string name="snack_bar_delete_todo">Task is successfully deleted</string>
     <string name="undo">Undo</string>
     <string name="channel_name">Push-notifications</string>
     <string name="date_dialog_task">Move a task to another day</string>
@@ -27,7 +27,7 @@
         <item>Low priority</item>
         <item>No priority</item>
     </string-array>
-    <string name="snackBarDeleteNote">Note is successfully deleted</string>
+    <string name="snack_bar_delete_note">Note is successfully deleted</string>
     <string name="share">Share</string>
     <string name="redo">Redo</string>
     <string name="share_via">Share via</string>

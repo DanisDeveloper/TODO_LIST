@@ -16,26 +16,23 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.danis.android.todo_list.R
-import com.danis.android.todo_list.databinding.FragmentNotesBinding
-import com.danis.android.todo_list.databinding.NotesItemBinding
+import com.danis.android.todo_list.databinding.FragmentNoteBinding
 import com.danis.android.todo_list.domain.Note.CaseNote
-import com.danis.android.todo_list.domain.TODO.CaseTODO
 import com.danis.android.todo_list.presentation.activities.NoteDetailActivity
-import com.danis.android.todo_list.presentation.adapters.notes.NotesAdapter
-import com.danis.android.todo_list.presentation.viewmodel.NotesViewModel
+import com.danis.android.todo_list.presentation.adapters.notes.NoteAdapter
+import com.danis.android.todo_list.presentation.viewmodel.NoteViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
-import java.util.*
 
 
 class NotesFragment : Fragment() {
-    private var _binding: FragmentNotesBinding? = null
-    private val binding: FragmentNotesBinding
-        get() = _binding ?: throw RuntimeException("FragmentNotesBinding == null")
+    private var _binding: FragmentNoteBinding? = null
+    private val binding: FragmentNoteBinding
+        get() = _binding ?: throw RuntimeException("FragmentNoteBinding == null")
 
-    private lateinit var notesAdapter: NotesAdapter
-    private val notesViewModel: NotesViewModel by lazy {
-        ViewModelProvider(this)[NotesViewModel::class.java]
+    private lateinit var noteAdapter: NoteAdapter
+    private val noteViewModel: NoteViewModel by lazy {
+        ViewModelProvider(this)[NoteViewModel::class.java]
     }
     private lateinit var snackbarUndo: Snackbar
     private var launcher: ActivityResultLauncher<Intent>? = null
@@ -45,7 +42,7 @@ class NotesFragment : Fragment() {
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == RESULT_OK){
                 val caseNote = it.data?.getSerializableExtra("CASE") as CaseNote
-                notesViewModel.updateNote(caseNote)
+                noteViewModel.updateNote(caseNote)
             }
         }
     }
@@ -53,7 +50,7 @@ class NotesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentNotesBinding.inflate(inflater, container, false)
+        _binding = FragmentNoteBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -61,20 +58,20 @@ class NotesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setCustomSnackBar()
         setupRecyclerView()
-        notesViewModel.notesListLiveData.observe(viewLifecycleOwner) { list ->
-            notesAdapter.notesList = list
+        noteViewModel.notesListLiveData.observe(viewLifecycleOwner) { list ->
+            noteAdapter.notesList = list
             if (list.isEmpty()) binding.notesNotFoundImageView.visibility = View.VISIBLE
             else binding.notesNotFoundImageView.visibility = View.GONE
         }
-        notesViewModel.searchStringLiveData.observe(viewLifecycleOwner) {
-            notesViewModel.loadListNotes()
+        noteViewModel.searchStringLiveData.observe(viewLifecycleOwner) {
+            noteViewModel.loadListNotes()
         }
 
     }
 
     private fun setupRecyclerView() {
-        notesAdapter = NotesAdapter(notesViewModel.notesList)
-        binding.recyclerView.adapter = notesAdapter
+        noteAdapter = NoteAdapter(noteViewModel.notesList)
+        binding.recyclerView.adapter = noteAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         setupItemTouchHelper()
         setupClickListeners()
@@ -92,7 +89,7 @@ class NotesFragment : Fragment() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val caseNote = notesViewModel.notesList[viewHolder.adapterPosition]
+                val caseNote = noteViewModel.notesList[viewHolder.adapterPosition]
                 deleteNoteItemWithSnackBar(caseNote)
             }
         }
@@ -101,7 +98,7 @@ class NotesFragment : Fragment() {
     }
 
     private fun setupClickListeners() {
-        notesAdapter.onItemClickListener = {
+        noteAdapter.onItemClickListener = {
             launcher?.launch(NoteDetailActivity.newIntent(requireActivity(), it))
         }
     }
@@ -109,7 +106,7 @@ class NotesFragment : Fragment() {
     private fun setCustomSnackBar() {
         snackbarUndo = Snackbar.make(
             binding.coordinatorLayout,
-            R.string.snackBarDeleteNote,
+            R.string.snack_bar_delete_note,
             Snackbar.LENGTH_LONG
         )
         snackbarUndo.setBackgroundTint(
@@ -134,9 +131,9 @@ class NotesFragment : Fragment() {
     }
 
     private fun deleteNoteItemWithSnackBar(caseNote: CaseNote) {
-        notesViewModel.deleteNote(caseNote)
+        noteViewModel.deleteNote(caseNote)
         snackbarUndo.setAction(R.string.undo) {
-            notesViewModel.insertNote(caseNote)
+            noteViewModel.insertNote(caseNote)
         }
         snackbarUndo.show()
     }
@@ -145,8 +142,8 @@ class NotesFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.addButton.setOnClickListener {
-            val caseNote = notesViewModel.getNewNote()
-            notesViewModel.insertNote(caseNote)
+            val caseNote = noteViewModel.getNewNote()
+            noteViewModel.insertNote(caseNote)
             launcher?.launch(NoteDetailActivity.newIntent(requireActivity(), caseNote))
         }
         binding.notesSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -155,7 +152,7 @@ class NotesFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                notesViewModel.searchNotes(newText ?: "")
+                noteViewModel.searchNotes(newText ?: "")
                 return true
             }
         })

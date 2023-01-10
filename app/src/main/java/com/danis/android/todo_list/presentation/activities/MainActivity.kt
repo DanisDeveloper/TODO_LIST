@@ -7,7 +7,7 @@ import com.danis.android.todo_list.R
 import com.danis.android.todo_list.databinding.ActivityMainBinding
 import com.danis.android.todo_list.presentation.adapters.ViewPagerAdapter
 import com.danis.android.todo_list.presentation.fragments.NotesFragment
-import com.danis.android.todo_list.presentation.fragments.TodoFragment
+import com.danis.android.todo_list.presentation.fragments.TODOFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
 
@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private val fragmentList: List<Fragment> =
-        listOf(TodoFragment.newInstance(), NotesFragment.newInstance())
-    private val fragmentListTitles = listOf(R.string.TODO, R.string.Notes)
+        listOf(TODOFragment.newInstance(), NotesFragment.newInstance())
+    private val fragmentListTitles = listOf(R.string.todo, R.string.Notes)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

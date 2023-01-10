@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.danis.android.todo_list.databinding.NotesItemBinding
+import com.danis.android.todo_list.databinding.NoteItemBinding
 import com.danis.android.todo_list.domain.Note.CaseNote
 
-class NotesAdapter(notesList: List<CaseNote>) : RecyclerView.Adapter<NotesViewHolder>() {
+class NoteAdapter(notesList: List<CaseNote>) : RecyclerView.Adapter<NoteViewHolder>() {
     var notesList: List<CaseNote> = notesList
         set(value) {
-            val callback = NotesDiffCallback(notesList, value)
+            val callback = NoteDiffCallback(notesList, value)
             val diffResult = DiffUtil.calculateDiff(callback)
             diffResult.dispatchUpdatesTo(this)
             field = value
@@ -20,17 +20,17 @@ class NotesAdapter(notesList: List<CaseNote>) : RecyclerView.Adapter<NotesViewHo
     //private var countOnBind = 0
     //private var countOnCreate = 0
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         //Log.d("TAG","onCreate ${countOnCreate++}")
-        val binding = NotesItemBinding.inflate(
+        val binding = NoteItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return NotesViewHolder(binding)
+        return NoteViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         //Log.d("TAG","onBind ${countOnBind++}")
         val caseNote = notesList[position]
         holder.bind(caseNote)

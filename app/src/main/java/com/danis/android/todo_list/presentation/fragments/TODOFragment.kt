@@ -1,11 +1,8 @@
 package com.danis.android.todo_list.presentation.fragments
 
 import android.app.AlarmManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +27,7 @@ import java.util.*
 import kotlin.random.Random
 
 
-class TodoFragment : Fragment() {
+class TODOFragment : Fragment() {
 
     private var _binding: FragmentTodoBinding? = null
     private val binding: FragmentTodoBinding
@@ -110,7 +107,7 @@ class TodoFragment : Fragment() {
     private fun setCustomSnackBar(){
         snackbarUndo = Snackbar.make(
             binding.coordinatorLayout,
-            R.string.snackBarDeleteTODO,
+            R.string.snack_bar_delete_todo,
             Snackbar.LENGTH_LONG
         )
         snackbarUndo.setBackgroundTint(ContextCompat.getColor(
@@ -216,7 +213,7 @@ class TodoFragment : Fragment() {
         private const val DATE_PICKER_DIALOG_TAG = "DATE_PICKER_DIALOG_TAG"
         private const val BOTTOM_SHEET_DIALOG = "BOTTOM_SHEET_DIALOG"
 
-        fun newInstance() = TodoFragment().apply {
+        fun newInstance() = TODOFragment().apply {
             arguments = Bundle().apply {
 
             }

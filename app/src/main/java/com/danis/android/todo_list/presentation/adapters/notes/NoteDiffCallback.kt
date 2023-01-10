@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.danis.android.todo_list.domain.Note.CaseNote
 import com.danis.android.todo_list.domain.TODO.CaseTODO
 
-class NotesDiffCallback(private val oldList: List<CaseNote>, private val newList: List<CaseNote>) :
+class NoteDiffCallback(private val oldList: List<CaseNote>, private val newList: List<CaseNote>) :
     DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 

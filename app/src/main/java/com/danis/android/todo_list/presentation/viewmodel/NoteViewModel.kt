@@ -7,7 +7,7 @@ import com.danis.android.todo_list.domain.Note.*
 import kotlinx.coroutines.launch
 import java.util.*
 
-class NotesViewModel(application: Application): AndroidViewModel(application) {
+class NoteViewModel(application: Application): AndroidViewModel(application) {
     private val repository = RepositoryImpl(application)
     private val getNoteListUseCase = GetNoteListUseCase(repository)
     private val insertNoteItemUseCase = InsertNoteItemUseCase(repository)

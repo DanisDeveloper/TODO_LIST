@@ -131,7 +131,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.danis.android.todo_list.presentation.MySpinner
+    <com.danis.android.todo_list.presentation.CustomSpinner
         android:id="@+id/prioritySpinner"
         android:layout_width="40dp"
         android:layout_height="40dp"

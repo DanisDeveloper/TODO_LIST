@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Блокнот</string>
-    <string name="TODO">Дела</string>
+    <string name="todo">Дела</string>
     <string name="Notes">Заметки</string>
     <string name="search_todo_hint">Поиск задачи</string>
     <string name="search_notes_hint">Поиск заметки</string>
@@ -17,7 +17,7 @@
     <string name="date">Дата</string>
     <string name="delete">Удалить</string>
     <string name="cancel">Отменить</string>
-    <string name="snackBarDeleteTODO">Задача успешно удалена</string>
+    <string name="snack_bar_delete_todo">Задача успешно удалена</string>
     <string name="undo">Отменить</string>
     <string name="channel_name">Push-ведомления</string>
     <string name="date_dialog_task">Перенести задачу на другой день</string>
@@ -28,10 +28,10 @@
         <item>Низкий приоритет</item>
         <item>Без приоритета</item>
     </string-array>
-    <string name="snackBarDeleteNote">Заметка успешно удалена</string>
+    <string name="snack_bar_delete_note">Заметка успешно удалена</string>
     <string name="share">Поделиться</string>
     <string name="redo">Восстановить</string>
     <string name="share_via">Поделиться через</string>
     <string name="time_picker">Выбор времени уведомления</string>
-    <string name="okey">Окей</string>
+    <string name="okay">Окей</string>
 </resources>
