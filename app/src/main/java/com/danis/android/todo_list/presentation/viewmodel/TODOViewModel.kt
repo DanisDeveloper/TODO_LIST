@@ -62,6 +62,7 @@ class TODOViewModel(application: Application) : AndroidViewModel(application) {
             loadTODOList(Date(caseTODO.date))
         }
     }
+
     fun insertTODOItem(caseTODO: CaseTODO){
         viewModelScope.launch {
             //updateTODOListUseCase.updateTODOList(TODOList)
@@ -96,6 +97,7 @@ class TODOViewModel(application: Application) : AndroidViewModel(application) {
             loadTODOList(Date(dateLiveData.value?.time!!))
         }
     }
+
     fun changeEnabledState(caseTODO: CaseTODO){
         viewModelScope.launch {
             updateTODOItemUseCase.updateTODOItem(caseTODO.copy(isSolved = !caseTODO.isSolved))
@@ -114,8 +116,7 @@ class TODOViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun getFormattedTime(date: Date): String {
-        val formatter = SimpleDateFormat("EEEE, dd.MM.yy", Locale.getDefault())
+        val formatter = SimpleDateFormat("EEEE dd.MM.yy", Locale.getDefault())
         return formatter.format(date)
     }
-
 }
