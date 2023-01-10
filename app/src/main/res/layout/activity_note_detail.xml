@@ -1,85 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar_background">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/note_detail_toolbar"
+            app:navigationIcon="@drawable/ic_back_arrow" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/corner_16dp"
+        android:backgroundTint="@color/item_enabled_background"
+        android:ems="10"
+        android:hint="@string/hint_title"
+        android:inputType="textMultiLine|textPersonName"
+        android:maxLength="90"
+        android:maxLines="6"
+        android:minHeight="60dp"
+        android:padding="8dp"
+        android:textColorHint="@color/hint"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/toolbar_background">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:menu="@menu/note_detail_toolbar"
-                app:navigationIcon="@drawable/ic_back_arrow" />
-        </com.google.android.material.appbar.AppBarLayout>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/corner_16dp"
+        android:backgroundTint="@color/item_enabled_background"
+        android:scrollbars="none"
+        android:fillViewport="true">
 
         <EditText
-            android:id="@+id/titleEditText"
+            android:id="@+id/contentEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/corner_16dp"
-            android:backgroundTint="@color/item_enabled_background"
-            android:maxLength="90"
-            android:maxLines="6"
+            android:background="@null"
             android:ems="10"
-            android:hint="@string/hint_title"
+            android:gravity="top|start"
+            android:hint="@string/hint_content"
             android:inputType="textMultiLine|textPersonName"
-            android:minHeight="60dp"
+            android:minHeight="48dp"
             android:padding="8dp"
-            android:textColorHint="@color/hint"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/corner_16dp"
-            android:backgroundTint="@color/item_enabled_background"
-            android:scrollbars="none">
+            android:scrollHorizontally="false"
+            android:textColorHint="@color/hint" />
+    </ScrollView>
 
-            <EditText
-                android:id="@+id/contentEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:ems="10"
-                android:gravity="top|left"
-                android:hint="@string/hint_content"
-                android:inputType="textMultiLine|textPersonName"
-                android:minHeight="48dp"
-                android:padding="8dp"
-                android:scrollbars="vertical"
-                android:scrollHorizontally="false"
-                android:textColorHint="@color/hint"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleEditText"
-                app:layout_constraintVertical_bias="0.0" />
-        </ScrollView>
-
-    </LinearLayout>
+</LinearLayout>
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
 

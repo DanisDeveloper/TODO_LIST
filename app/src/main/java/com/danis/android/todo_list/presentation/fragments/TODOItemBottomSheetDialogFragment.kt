@@ -45,7 +45,6 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
         super.onCreate(savedInstanceState)
         inCaseTODO = requireArguments().getSerializable(CASE_TODO) as CaseTODO
         outCaseTODO = inCaseTODO.copy()
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.BottomSheetDialogTheme)
     }
 
     override fun onCreateView(
@@ -256,6 +255,8 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
             case.notificationTime = null
         }
     }
+
+    override fun getTheme() = R.style.CustomBottomSheetDialogTheme
 
     companion object {
         private const val TIME_PICKER_TAG = "TIME_PICKER_TAG"
