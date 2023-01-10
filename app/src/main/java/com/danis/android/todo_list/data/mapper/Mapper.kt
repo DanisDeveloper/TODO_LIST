@@ -6,6 +6,7 @@ import com.danis.android.todo_list.domain.Note.CaseNote
 import com.danis.android.todo_list.domain.TODO.CaseTODO
 
 class Mapper {
+
     fun mapCaseNoteDbModelToCaseNote(CaseNoteDbModel:CaseNoteDbModel):CaseNote{
         return CaseNote(
             id = CaseNoteDbModel.id,
@@ -14,6 +15,7 @@ class Mapper {
             position = CaseNoteDbModel.position
         )
     }
+
     fun mapCaseNoteToCaseNoteDbModel(caseNote:CaseNote):CaseNoteDbModel{
         return CaseNoteDbModel(
             id = caseNote.id,
@@ -34,6 +36,7 @@ class Mapper {
             notificationId = CaseTODODbModel.notificationId
         )
     }
+
     fun mapCaseTODOToCaseTODODbModel(caseTODO:CaseTODO):CaseTODODbModel{
         return CaseTODODbModel(
             id = caseTODO.id,

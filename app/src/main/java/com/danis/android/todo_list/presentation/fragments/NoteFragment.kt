@@ -66,7 +66,6 @@ class NoteFragment : Fragment() {
         noteViewModel.searchStringLiveData.observe(viewLifecycleOwner) {
             noteViewModel.loadListNotes()
         }
-
     }
 
     private fun setupRecyclerView() {
@@ -172,6 +171,4 @@ class NoteFragment : Fragment() {
             }
         }
     }
-
-
 }

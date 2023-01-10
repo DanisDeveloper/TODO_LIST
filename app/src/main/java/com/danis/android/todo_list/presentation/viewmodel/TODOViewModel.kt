@@ -40,7 +40,7 @@ class TODOViewModel(application: Application) : AndroidViewModel(application) {
 
     fun loadTODOList(date: Date = getDate()) {
         viewModelScope.launch {
-            TODOList = getTODOListUseCase.getTODOList(date.time)
+            TODOList = getTODOListUseCase.getTODOList(date.time).sortedBy { it.isSolved }
             _todoListLiveData.value = TODOList
         }
         _formattedTime.value = getFormattedTime(date)
