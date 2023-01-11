@@ -1,9 +1,7 @@
 package com.danis.android.todo_list.domain
 
-import androidx.lifecycle.LiveData
 import com.danis.android.todo_list.domain.Note.CaseNote
 import com.danis.android.todo_list.domain.TODO.CaseTODO
-import java.util.*
 
 interface Repository {
     suspend fun getTODOList(date:Long):List<CaseTODO>

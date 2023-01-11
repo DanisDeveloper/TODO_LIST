@@ -10,7 +10,6 @@ import com.danis.android.todo_list.domain.TODO.*
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.random.Random
 
 class TODOViewModel(application: Application) : AndroidViewModel(application) {
 

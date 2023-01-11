@@ -26,7 +26,6 @@ import com.google.android.material.snackbar.Snackbar
 import java.util.*
 import kotlin.random.Random
 
-
 class TODOFragment : Fragment() {
 
     private var _binding: FragmentTodoBinding? = null
