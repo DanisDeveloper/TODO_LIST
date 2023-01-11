@@ -34,18 +34,19 @@ class NoteFragment : Fragment() {
     private val noteViewModel: NoteViewModel by lazy {
         ViewModelProvider(this)[NoteViewModel::class.java]
     }
-    private lateinit var snackbarUndo: Snackbar
+    private lateinit var snackBarUndo: Snackbar
     private var launcher: ActivityResultLauncher<Intent>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == RESULT_OK){
-                val caseNote = it.data?.getSerializableExtra("CASE") as CaseNote
+                val caseNote = it.data?.getSerializableExtra(NoteDetailActivity.CASE) as CaseNote
                 noteViewModel.updateNote(caseNote)
             }
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -104,40 +105,39 @@ class NoteFragment : Fragment() {
     }
 
     private fun setCustomSnackBar() {
-        snackbarUndo = Snackbar.make(
+        snackBarUndo = Snackbar.make(
             binding.coordinatorLayout,
             R.string.snack_bar_delete_note,
             Snackbar.LENGTH_LONG
         )
-        snackbarUndo.setBackgroundTint(
+        snackBarUndo.setBackgroundTint(
             ContextCompat.getColor(
                 requireActivity(),
                 R.color.item_enabled_background
             )
         )
-        snackbarUndo.setTextColor(
+        snackBarUndo.setTextColor(
             ContextCompat.getColor(
                 requireActivity(),
                 R.color.text_color
             )
         )
-        snackbarUndo.setActionTextColor(
+        snackBarUndo.setActionTextColor(
             ContextCompat.getColor(
                 requireActivity(),
                 R.color.orange
             )
         )
-        snackbarUndo.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+        snackBarUndo.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
     }
 
     private fun deleteNoteItemWithSnackBar(caseNote: CaseNote) {
         noteViewModel.deleteNote(caseNote)
-        snackbarUndo.setAction(R.string.undo) {
+        snackBarUndo.setAction(R.string.undo) {
             noteViewModel.insertNote(caseNote)
         }
-        snackbarUndo.show()
+        snackBarUndo.show()
     }
-
 
     override fun onStart() {
         super.onStart()

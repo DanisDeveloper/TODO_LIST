@@ -20,7 +20,6 @@ class NoteDetailActivity : AppCompatActivity() {
         ViewModelProvider(this)[NoteDetailViewModel::class.java]
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNoteDetailBinding.inflate(layoutInflater)
@@ -34,7 +33,6 @@ class NoteDetailActivity : AppCompatActivity() {
         noteDetailViewModel.inCaseNote = intent.getSerializableExtra(NOTE_ID) as CaseNote
         noteDetailViewModel.outCaseNote = noteDetailViewModel.inCaseNote.copy()
     }
-
 
     override fun onStart() {
         super.onStart()
@@ -115,7 +113,7 @@ class NoteDetailActivity : AppCompatActivity() {
     }
 
     private fun returnResult() {
-        setResult(RESULT_OK, Intent().putExtra("CASE", noteDetailViewModel.outCaseNote))
+        setResult(RESULT_OK, Intent().putExtra(CASE, noteDetailViewModel.outCaseNote))
         finish()
     }
 
@@ -126,6 +124,7 @@ class NoteDetailActivity : AppCompatActivity() {
 
     companion object {
         private const val NOTE_ID = "NOTE_ID"
+        const val CASE = "CASE"
         fun newIntent(context: Context, caseNote: CaseNote): Intent {
             return Intent(context, NoteDetailActivity::class.java).apply {
                 putExtra(NOTE_ID, caseNote)

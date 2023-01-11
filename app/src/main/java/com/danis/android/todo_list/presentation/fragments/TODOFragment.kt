@@ -24,7 +24,6 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
-import kotlin.random.Random
 
 class TODOFragment : Fragment() {
 
@@ -37,7 +36,7 @@ class TODOFragment : Fragment() {
     }
 
     private lateinit var todoAdapter: TODOAdapter
-    private lateinit var snackbarUndo: Snackbar
+    private lateinit var snackBarUndo: Snackbar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,34 +95,34 @@ class TODOFragment : Fragment() {
     private fun deleteTODOItemWithSnackBar(caseTODO: CaseTODO){
         todoViewModel.deleteTodo(caseTODO)
         cancelAlarm(caseTODO)
-        snackbarUndo.setAction(R.string.undo){
+        snackBarUndo.setAction(R.string.undo){
             todoViewModel.insertTODOItem(caseTODO)
             if(caseTODO.notificationTime !=null)
                 if(caseTODO.notificationTime!! >= Date().time)
                     setAlarm(caseTODO)
         }
-        snackbarUndo.show()
+        snackBarUndo.show()
     }
 
     private fun setCustomSnackBar(){
-        snackbarUndo = Snackbar.make(
+        snackBarUndo = Snackbar.make(
             binding.coordinatorLayout,
             R.string.snack_bar_delete_todo,
             Snackbar.LENGTH_LONG
         )
-        snackbarUndo.setBackgroundTint(ContextCompat.getColor(
+        snackBarUndo.setBackgroundTint(ContextCompat.getColor(
             requireActivity(),
             R.color.item_enabled_background
         ))
-        snackbarUndo.setTextColor(ContextCompat.getColor(
+        snackBarUndo.setTextColor(ContextCompat.getColor(
             requireActivity(),
             R.color.text_color
         ))
-        snackbarUndo.setActionTextColor(ContextCompat.getColor(
+        snackBarUndo.setActionTextColor(ContextCompat.getColor(
             requireActivity(),
             R.color.orange
         ))
-        snackbarUndo.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+        snackBarUndo.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
     }
 
     private fun setupClickListeners() {
