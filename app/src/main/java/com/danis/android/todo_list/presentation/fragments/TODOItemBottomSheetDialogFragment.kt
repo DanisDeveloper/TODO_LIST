@@ -19,6 +19,7 @@ import com.danis.android.todo_list.AlarmReceiver
 import com.danis.android.todo_list.R
 import com.danis.android.todo_list.databinding.FragmentTodoItemBottomSheetBinding
 import com.danis.android.todo_list.domain.TODO.CaseTODO
+import com.danis.android.todo_list.presentation.viewmodel.TODOViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -82,13 +83,12 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 DATE_PICKER_DIALOG_TAG
             )
             datePicker.addOnPositiveButtonClickListener {
+                val itDate = getDate(it).time
                 if(outCaseTODO.notificationTime !=null){
                     val notificationTime = outCaseTODO.notificationTime!! - getDate(outCaseTODO.date).time
-                    cancelAlarm(outCaseTODO)
-                    outCaseTODO.notificationTime = notificationTime + getDate(it).time
-                    setAlarm(outCaseTODO)
+                    outCaseTODO.notificationTime = notificationTime + itDate
                 }
-                outCaseTODO.date = getDate(it).time
+                outCaseTODO.date = itDate
                 binding.dateTextView.text = getFormattedDate(it)
             }
         }
@@ -110,12 +110,6 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
         }
         binding.chipSave.setOnClickListener {
             onSaveClickListener?.invoke(outCaseTODO)
-            if(outCaseTODO.notificationTime != null){
-                setAlarm(outCaseTODO)
-            }
-            else{
-                cancelAlarm(outCaseTODO)
-            }
             dismiss()
         }
         val spinnerAdapter = ArrayAdapter.createFromResource(
@@ -217,42 +211,8 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
             calendar[Calendar.SECOND] = 0
             calendar[Calendar.MILLISECOND] = 0
             case.notificationTime = calendar.time.time
-            if(case.notificationId == null) case.notificationId = Random.nextInt()
+            if(case.notificationId == null) case.notificationId = (Math.random()* MAX_RANDOM_VALUE).toInt()
             binding.notificationTextView.text = getFormattedTime(case.notificationTime)
-        }
-    }
-
-    private fun setAlarm(case: CaseTODO) {
-        val alarmManager = activity?.getSystemService(AppCompatActivity.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(context, AlarmReceiver::class.java).apply {
-            putExtra(CONTENT_TEXT_KEY, case.todo)
-        }
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            case.notificationId!!,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        alarmManager.setExact(
-            AlarmManager.RTC_WAKEUP,
-            case.notificationTime!!,
-            pendingIntent
-        )
-    }
-
-    private fun cancelAlarm(case: CaseTODO) {
-        if(case.notificationId !=null) {
-            val alarmManager =
-                activity?.getSystemService(AppCompatActivity.ALARM_SERVICE) as AlarmManager
-            val intent = Intent(context, AlarmReceiver::class.java)
-            val pendingIntent = PendingIntent.getBroadcast(
-                context,
-                case.notificationId!!,
-                intent,
-                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-            )
-            alarmManager.cancel(pendingIntent)
-            case.notificationTime = null
         }
     }
 
@@ -260,7 +220,6 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     companion object {
         private const val TIME_PICKER_TAG = "TIME_PICKER_TAG"
-        private const val CONTENT_TEXT_KEY = "CONTENT_TEXT_KEY"
         private const val CASE_TODO = "CASE_TODO"
         private const val DATE_PICKER_DIALOG_TAG = "DATE_PICKER_DIALOG_TAG"
         private const val NUMBER_OF_PRIORITIES = 3
@@ -268,6 +227,8 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
         private const val LOW_PRIORITY = 1
         private const val MEDIUM_PRIORITY = 2
         private const val HIGH_PRIORITY = 3
+        private const val MAX_RANDOM_VALUE = 10000000
+
         fun newInstance(caseTODO: CaseTODO) = TODOItemBottomSheetDialogFragment().apply {
             arguments = Bundle().apply {
                 putSerializable(CASE_TODO, caseTODO)

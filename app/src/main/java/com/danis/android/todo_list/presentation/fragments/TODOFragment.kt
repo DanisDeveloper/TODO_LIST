@@ -130,6 +130,13 @@ class TODOFragment : Fragment() {
             val bottomSheet = TODOItemBottomSheetDialogFragment.newInstance(it)
             bottomSheet.onSaveClickListener = { caseTODO ->
                 todoViewModel.updateTODOItem(caseTODO)
+                if(caseTODO.notificationTime != null){
+                    cancelAlarm(caseTODO)
+                    setAlarm(caseTODO)
+                }
+                else{
+                    cancelAlarm(caseTODO)
+                }
             }
             bottomSheet.onDeleteClickListener = { caseTODO ->
                 deleteTODOItemWithSnackBar(caseTODO)
@@ -145,29 +152,25 @@ class TODOFragment : Fragment() {
     }
 
     private fun setAlarm(case: CaseTODO) {
-        if(case.notificationTime!=null) {
-            val alarmManager =
-                activity?.getSystemService(AppCompatActivity.ALARM_SERVICE) as AlarmManager
-            val intent = Intent(context, AlarmReceiver::class.java).apply {
-                putExtra(CONTENT_TEXT_KEY, case.todo)
-            }
-            if (case.notificationId == null) case.notificationId = Random.nextInt()
-            val pendingIntent = PendingIntent.getBroadcast(
-                context,
-                case.notificationId!!,
-                intent,
-                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-            )
-            alarmManager.setExact(
-                AlarmManager.RTC_WAKEUP,
-                case.notificationTime!!,
-                pendingIntent
-            )
+        val alarmManager = activity?.getSystemService(AppCompatActivity.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmReceiver::class.java).apply {
+            putExtra(CONTENT_TEXT_KEY, case.todo)
         }
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            case.notificationId!!,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+        alarmManager.setExact(
+            AlarmManager.RTC_WAKEUP,
+            case.notificationTime!!,
+            pendingIntent
+        )
     }
 
     private fun cancelAlarm(case: CaseTODO) {
-        if(case.notificationId!=null) {
+        if(case.notificationId !=null) {
             val alarmManager =
                 activity?.getSystemService(AppCompatActivity.ALARM_SERVICE) as AlarmManager
             val intent = Intent(context, AlarmReceiver::class.java)

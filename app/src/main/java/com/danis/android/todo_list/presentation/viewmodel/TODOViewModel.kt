@@ -10,6 +10,7 @@ import com.danis.android.todo_list.domain.TODO.*
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.random.Random
 
 class TODOViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -54,7 +55,7 @@ class TODOViewModel(application: Application) : AndroidViewModel(application) {
             false,
             0,
             null,
-            null
+            (Math.random()*MAX_RANDOM_VALUE).toInt()
         )
         viewModelScope.launch {
             //updateTODOListUseCase.updateTODOList(TODOList)
@@ -118,5 +119,8 @@ class TODOViewModel(application: Application) : AndroidViewModel(application) {
     private fun getFormattedTime(date: Date): String {
         val formatter = SimpleDateFormat("EEEE dd.MM.yy", Locale.getDefault())
         return formatter.format(date)
+    }
+    companion object{
+        private const val MAX_RANDOM_VALUE = 10000000
     }
 }
