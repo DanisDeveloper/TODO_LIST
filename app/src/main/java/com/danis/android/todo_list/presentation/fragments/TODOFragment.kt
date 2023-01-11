@@ -99,7 +99,9 @@ class TODOFragment : Fragment() {
         cancelAlarm(caseTODO)
         snackbarUndo.setAction(R.string.undo){
             todoViewModel.insertTODOItem(caseTODO)
-            setAlarm(caseTODO)
+            if(caseTODO.notificationTime !=null)
+                if(caseTODO.notificationTime!! >= Date().time)
+                    setAlarm(caseTODO)
         }
         snackbarUndo.show()
     }
