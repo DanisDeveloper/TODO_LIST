@@ -22,7 +22,7 @@
         android:minHeight="48dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/prioritySpinner"
+        app:layout_constraintEnd_toStartOf="@+id/menuImageButton"
         app:layout_constraintStart_toEndOf="@+id/checkBox"
         app:layout_constraintTop_toBottomOf="@+id/chipCalendar"
         />
@@ -133,8 +133,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.danis.android.todo_list.presentation.CustomSpinner
-        android:id="@+id/prioritySpinner"
+    <ImageButton
+        android:id="@+id/menuImageButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="12dp"

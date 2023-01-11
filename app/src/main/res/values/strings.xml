@@ -21,12 +21,10 @@
     <string name="channel_name">Push-notifications</string>
     <string name="date_dialog_task">Move a task to another day</string>
     <string name="date_dialog">Select date</string>
-    <string-array name="priority">
-        <item>High priority</item>
-        <item>Medium priority</item>
-        <item>Low priority</item>
-        <item>No priority</item>
-    </string-array>
+    <string name="high_priority">High priority</string>
+    <string name="medium_priority">Medium priority</string>
+    <string name="low_priority">Low priority</string>
+    <string name="no_priority">No priority</string>
     <string name="snack_bar_delete_note">Note is successfully deleted</string>
     <string name="share">Share</string>
     <string name="redo">Redo</string>

@@ -1,6 +1,7 @@
 package com.danis.android.todo_list.presentation.fragments
 
 import android.app.Activity
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,8 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
+import androidx.appcompat.widget.PopupMenu
 import com.danis.android.todo_list.R
 import com.danis.android.todo_list.databinding.FragmentTodoItemBottomSheetBinding
 import com.danis.android.todo_list.domain.TODO.CaseTODO
@@ -33,6 +33,7 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
     var onDeleteClickListener: ((CaseTODO) -> Unit)? = null
     var onSaveClickListener: ((CaseTODO) -> Unit)? = null
 
+    private lateinit var popupMenu:PopupMenu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,38 +96,50 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
             onSaveClickListener?.invoke(outCaseTODO)
             dismiss()
         }
-        val spinnerAdapter = ArrayAdapter.createFromResource(
-            requireActivity(),
-            R.array.priority,
-            android.R.layout.simple_spinner_item
-        )
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.prioritySpinner.adapter = spinnerAdapter
-        binding.prioritySpinner.setSelection(0, false)
-        binding.prioritySpinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    val priority = NUMBER_OF_PRIORITIES - position
-                    outCaseTODO.priority = priority
-                    setBackgroundSpinnerByPriority(priority)
-                }
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            }
+        binding.menuImageButton.setOnClickListener {
+            popupMenu.show()
+        }
+        setPopupWindow()
         setBackgroundSpinnerByPriority(outCaseTODO.priority)
     }
 
     private fun setBackgroundSpinnerByPriority(priority: Int) {
         when (priority) {
-            NO_PRIORITY -> binding.prioritySpinner.setBackgroundResource(R.drawable.ic_priority)
-            LOW_PRIORITY -> binding.prioritySpinner.setBackgroundResource(R.drawable.ic_priority_low)
-            MEDIUM_PRIORITY -> binding.prioritySpinner.setBackgroundResource(R.drawable.ic_priority_medium)
-            HIGH_PRIORITY -> binding.prioritySpinner.setBackgroundResource(R.drawable.ic_priority_high)
-            else -> binding.prioritySpinner.setBackgroundResource(R.drawable.ic_priority)
+            NO_PRIORITY -> binding.menuImageButton.setBackgroundResource(R.drawable.ic_priority)
+            LOW_PRIORITY -> binding.menuImageButton.setBackgroundResource(R.drawable.ic_priority_low)
+            MEDIUM_PRIORITY -> binding.menuImageButton.setBackgroundResource(R.drawable.ic_priority_medium)
+            HIGH_PRIORITY -> binding.menuImageButton.setBackgroundResource(R.drawable.ic_priority_high)
+            else -> binding.menuImageButton.setBackgroundResource(R.drawable.ic_priority)
+        }
+    }
+
+    private fun setPopupWindow(){
+        popupMenu = PopupMenu(requireActivity(),binding.menuImageButton)
+        popupMenu.inflate(R.menu.priority_menu)
+        popupMenu.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.high_priority ->{
+                    outCaseTODO.priority = HIGH_PRIORITY
+                    binding.menuImageButton.setBackgroundResource(R.drawable.ic_priority_high)
+                }
+                R.id.medium_priority ->{
+                    outCaseTODO.priority = MEDIUM_PRIORITY
+                    binding.menuImageButton.setBackgroundResource(R.drawable.ic_priority_medium)
+                }
+                R.id.low_priority ->{
+                    outCaseTODO.priority = LOW_PRIORITY
+                    binding.menuImageButton.setBackgroundResource(R.drawable.ic_priority_low)
+                }
+                R.id.no_priority ->{
+                    outCaseTODO.priority = NO_PRIORITY
+                    binding.menuImageButton.setBackgroundResource(R.drawable.ic_priority)
+                }
+                else->{
+                    outCaseTODO.priority = NO_PRIORITY
+                    binding.menuImageButton.setBackgroundResource(R.drawable.ic_priority)
+                }
+            }
+            true
         }
     }
 
