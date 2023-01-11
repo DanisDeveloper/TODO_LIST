@@ -164,7 +164,7 @@ class TODOFragment : Fragment() {
         )
         alarmManager.setExact(
             AlarmManager.RTC_WAKEUP,
-            case.notificationTime!!,
+            case.notificationTime!!+case.date,
             pendingIntent
         )
     }
