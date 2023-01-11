@@ -153,7 +153,6 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
     private fun getDate(date: Long): Date {
         val calendar = Calendar.getInstance()
         calendar.time = Date(date)
-        calendar.get(Calendar.DATE)
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
