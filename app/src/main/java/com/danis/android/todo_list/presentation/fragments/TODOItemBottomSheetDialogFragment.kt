@@ -68,29 +68,12 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 outCaseTODO.todo = s.toString()
             }
-
             override fun afterTextChanged(s: Editable?) {}
         })
         binding.dateTextView.text = getFormattedDate(outCaseTODO.date)
         binding.notificationTextView.text = getFormattedTime(outCaseTODO.notificationTime)
         binding.chipCalendar.setOnClickListener {
-            val datePicker = MaterialDatePicker.Builder.datePicker()
-                .setTitleText(getString(R.string.date_dialog_task))
-                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                .build()
-            datePicker.show(
-                requireActivity().supportFragmentManager,
-                DATE_PICKER_DIALOG_TAG
-            )
-            datePicker.addOnPositiveButtonClickListener {
-                val itDate = getDate(it).time
-                if(outCaseTODO.notificationTime !=null){
-                    val notificationTime = outCaseTODO.notificationTime!! - getDate(outCaseTODO.date).time
-                    outCaseTODO.notificationTime = notificationTime + itDate
-                }
-                outCaseTODO.date = itDate
-                binding.dateTextView.text = getFormattedDate(it)
-            }
+            showDatePicker()
         }
         binding.chipNotification.setOnClickListener {
             if(outCaseTODO.notificationTime == null){
@@ -120,8 +103,7 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.prioritySpinner.adapter = spinnerAdapter
         binding.prioritySpinner.setSelection(0, false)
-        binding.prioritySpinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
+        binding.prioritySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
                     view: View?,
@@ -165,12 +147,14 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
             formatter.format(Date(date))
         } else ""
     }
+
     private fun getFormattedTime(date: Long?): String {
         return if (date != null) {
             val formatter = SimpleDateFormat("HH:mm", Locale.getDefault())
             formatter.format(Date(date))
         } else ""
     }
+
     private fun getDate(date: Long): Date {
         val calendar = Calendar.getInstance()
         calendar.time = Date(date)
@@ -213,6 +197,26 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
             case.notificationTime = calendar.time.time
             if(case.notificationId == null) case.notificationId = (Math.random()* MAX_RANDOM_VALUE).toInt()
             binding.notificationTextView.text = getFormattedTime(case.notificationTime)
+        }
+    }
+
+    private fun showDatePicker(){
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText(getString(R.string.date_dialog_task))
+            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+            .build()
+        datePicker.show(
+            requireActivity().supportFragmentManager,
+            DATE_PICKER_DIALOG_TAG
+        )
+        datePicker.addOnPositiveButtonClickListener {
+            val itDate = getDate(it).time
+            if(outCaseTODO.notificationTime !=null){
+                val notificationTime = outCaseTODO.notificationTime!! - getDate(outCaseTODO.date).time
+                outCaseTODO.notificationTime = notificationTime + itDate
+            }
+            outCaseTODO.date = itDate
+            binding.dateTextView.text = getFormattedDate(it)
         }
     }
 
