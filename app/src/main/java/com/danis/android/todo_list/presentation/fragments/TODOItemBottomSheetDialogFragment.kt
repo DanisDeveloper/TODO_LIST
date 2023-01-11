@@ -114,9 +114,7 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
                     val priority = NUMBER_OF_PRIORITIES - position
                     outCaseTODO.priority = priority
                     setBackgroundSpinnerByPriority(priority)
-
                 }
-
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
         setBackgroundSpinnerByPriority(outCaseTODO.priority)
