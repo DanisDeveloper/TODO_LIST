@@ -1,9 +1,6 @@
 package com.danis.android.todo_list.presentation.fragments
 
 import android.app.Activity
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,20 +10,15 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
-import com.danis.android.todo_list.AlarmReceiver
 import com.danis.android.todo_list.R
 import com.danis.android.todo_list.databinding.FragmentTodoItemBottomSheetBinding
 import com.danis.android.todo_list.domain.TODO.CaseTODO
-import com.danis.android.todo_list.presentation.viewmodel.TODOViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.random.Random
 
 
 class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
@@ -68,7 +60,10 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 outCaseTODO.todo = s.toString()
             }
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(editable: Editable?) {
+                if (binding.taskEditText.layout.lineCount > MAX_LINES_TASK_EDIT_TEXT)
+                    binding.taskEditText.text.delete(binding.taskEditText.text.length - 1, binding.taskEditText.text.length)
+            }
         })
         binding.dateTextView.text = getFormattedDate(outCaseTODO.date)
         binding.notificationTextView.text = getFormattedTime(outCaseTODO.notificationTime)
@@ -232,6 +227,7 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
         private const val MEDIUM_PRIORITY = 2
         private const val HIGH_PRIORITY = 3
         private const val MAX_RANDOM_VALUE = 10000000
+        private const val MAX_LINES_TASK_EDIT_TEXT = 6
 
         fun newInstance(caseTODO: CaseTODO) = TODOItemBottomSheetDialogFragment().apply {
             arguments = Bundle().apply {

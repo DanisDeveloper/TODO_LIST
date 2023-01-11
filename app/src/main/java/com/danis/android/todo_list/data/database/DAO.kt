@@ -1,6 +1,5 @@
 package com.danis.android.todo_list.data.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.danis.android.todo_list.data.database.model.CaseNoteDbModel
 import com.danis.android.todo_list.data.database.model.CaseTODODbModel
