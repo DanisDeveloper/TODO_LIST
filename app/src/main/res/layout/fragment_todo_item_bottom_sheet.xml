@@ -122,8 +122,9 @@
 
     <ImageView
         android:id="@+id/removeImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="12dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
         android:scaleX="3"
         android:scaleY="3"
         android:src="@drawable/ic_remove"
