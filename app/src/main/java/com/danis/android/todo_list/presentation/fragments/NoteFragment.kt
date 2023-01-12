@@ -19,6 +19,7 @@ import com.danis.android.todo_list.R
 import com.danis.android.todo_list.databinding.FragmentNoteBinding
 import com.danis.android.todo_list.domain.Note.CaseNote
 import com.danis.android.todo_list.presentation.activities.NoteDetailActivity
+import com.danis.android.todo_list.presentation.activities.NoteDetailActivity.Companion.RESULT_DELETE
 import com.danis.android.todo_list.presentation.adapters.notes.NoteAdapter
 import com.danis.android.todo_list.presentation.viewmodel.NoteViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
@@ -40,9 +41,15 @@ class NoteFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            if(it.resultCode == RESULT_OK){
-                val caseNote = it.data?.getSerializableExtra(NoteDetailActivity.CASE) as CaseNote
-                noteViewModel.updateNote(caseNote)
+            when(it.resultCode){
+                RESULT_OK-> {
+                    val caseNote = it.data?.getSerializableExtra(NoteDetailActivity.CASE) as CaseNote
+                    noteViewModel.updateNote(caseNote)
+                }
+                RESULT_DELETE->{
+                    val caseNote = it.data?.getSerializableExtra(NoteDetailActivity.CASE) as CaseNote
+                    noteViewModel.deleteNote(caseNote)
+                }
             }
         }
     }

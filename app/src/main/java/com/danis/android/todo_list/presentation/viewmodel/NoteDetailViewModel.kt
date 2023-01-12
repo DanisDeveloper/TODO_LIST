@@ -5,12 +5,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.danis.android.todo_list.data.RepositoryImpl
 import com.danis.android.todo_list.domain.Note.CaseNote
+import com.danis.android.todo_list.domain.Note.DeleteNoteItemUseCase
 import com.danis.android.todo_list.domain.Note.UpdateNoteItemUseCase
 import kotlinx.coroutines.launch
 
 class NoteDetailViewModel(application: Application):AndroidViewModel(application) {
     private val repository = RepositoryImpl(application)
     private val updateNoteItemUseCase = UpdateNoteItemUseCase(repository)
+    private val deleteNoteItemUseCase = DeleteNoteItemUseCase(repository)
 
     lateinit var inCaseNote: CaseNote
     lateinit var outCaseNote: CaseNote

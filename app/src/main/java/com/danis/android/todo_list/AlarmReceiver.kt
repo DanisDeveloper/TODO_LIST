@@ -11,8 +11,6 @@ import android.os.Build.VERSION_CODES.O
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.danis.android.todo_list.presentation.activities.MainActivity
-import com.danis.android.todo_list.presentation.fragments.TODOItemBottomSheetDialogFragment
-import kotlin.random.Random
 
 
 class AlarmReceiver : BroadcastReceiver() {

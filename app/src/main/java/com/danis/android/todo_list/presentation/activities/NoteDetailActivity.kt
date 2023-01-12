@@ -102,6 +102,10 @@ class NoteDetailActivity : AppCompatActivity() {
                         startActivity(Intent.createChooser(this, getString(R.string.share_via)))
                     }
                 }
+                R.id.delete->{
+                    setResult(RESULT_DELETE,Intent().putExtra(CASE,noteDetailViewModel.inCaseNote))
+                    finish()
+                }
             }
             true
         }
@@ -122,9 +126,11 @@ class NoteDetailActivity : AppCompatActivity() {
         noteDetailViewModel.saveNoteItem(noteDetailViewModel.outCaseNote)
     }
 
+
     companion object {
         private const val NOTE_ID = "NOTE_ID"
         const val CASE = "CASE"
+        const val RESULT_DELETE = 111
         fun newIntent(context: Context, caseNote: CaseNote): Intent {
             return Intent(context, NoteDetailActivity::class.java).apply {
                 putExtra(NOTE_ID, caseNote)
