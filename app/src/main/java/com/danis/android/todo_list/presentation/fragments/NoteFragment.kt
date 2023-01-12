@@ -48,7 +48,7 @@ class NoteFragment : Fragment() {
                 }
                 RESULT_DELETE->{
                     val caseNote = it.data?.getSerializableExtra(NoteDetailActivity.CASE) as CaseNote
-                    noteViewModel.deleteNote(caseNote)
+                    deleteNoteItemWithSnackBar(caseNote)
                 }
             }
         }
