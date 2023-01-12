@@ -71,6 +71,7 @@ class NoteDetailActivity : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener {
             returnResult()
         }
+        binding.toolbar.overflowIcon?.setTint(ContextCompat.getColor(this,R.color.white))
         binding.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.okay ->{
