@@ -115,10 +115,11 @@ class TODOViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun getFormattedTime(date: Date): String {
-        val formatter = SimpleDateFormat("EEEE dd.MM.yy", Locale.getDefault())
+        val formatter = SimpleDateFormat(DATE_PATTERN, Locale.getDefault())
         return formatter.format(date)
     }
     companion object{
         private const val MAX_RANDOM_VALUE = 10000000
+        private const val DATE_PATTERN = "EEEE dd.MM.yy"
     }
 }

@@ -26,7 +26,7 @@ interface DAO {
 
 
 
-    @Query("SELECT * FROM CaseNoteDbModel WHERE title LIKE (:searchQuery) ORDER BY position")
+    @Query("SELECT * FROM CaseNoteDbModel WHERE title LIKE (:searchQuery) ORDER BY lastUpdate DESC")
     suspend fun getNotesListLIKE(searchQuery:String):List<CaseNoteDbModel>
 
     @Insert

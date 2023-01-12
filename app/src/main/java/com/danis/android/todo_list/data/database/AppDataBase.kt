@@ -40,6 +40,7 @@ val migration_1_2 = object:Migration(1,2){
         database.execSQL("ALTER TABLE CaseTODODbModel ADD COLUMN notificationId INTEGER DEFAULT NULL")
         database.execSQL("ALTER TABLE CaseNotes RENAME TO CaseNoteDbModel")
         database.execSQL("ALTER TABLE CaseNoteDbModel RENAME COLUMN Title TO title")
+        database.execSQL("ALTER TABLE CaseNoteDbModel RENAME COLUMN position TO lastUpdate")
     }
 
 }

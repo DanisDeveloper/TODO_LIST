@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -104,7 +105,9 @@ class NoteDetailActivity : AppCompatActivity() {
                     }
                 }
                 R.id.delete->{
-                    setResult(RESULT_DELETE,Intent().putExtra(CASE,noteDetailViewModel.inCaseNote))
+                    noteDetailViewModel.outCaseNote.lastUpdate = Date().time
+                    noteDetailViewModel.saveNoteItem()
+                    setResult(RESULT_DELETE,Intent().putExtra(CASE,noteDetailViewModel.outCaseNote))
                     finish()
                 }
             }
@@ -118,13 +121,15 @@ class NoteDetailActivity : AppCompatActivity() {
     }
 
     private fun returnResult() {
+        noteDetailViewModel.outCaseNote.lastUpdate = Date().time
         setResult(RESULT_OK, Intent().putExtra(CASE, noteDetailViewModel.outCaseNote))
         finish()
     }
 
     override fun onStop() {
         super.onStop()
-        noteDetailViewModel.saveNoteItem(noteDetailViewModel.outCaseNote)
+        noteDetailViewModel.outCaseNote.lastUpdate = Date().time
+        noteDetailViewModel.saveNoteItem()
     }
 
 

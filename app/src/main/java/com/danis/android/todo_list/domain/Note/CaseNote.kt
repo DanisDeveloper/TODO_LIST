@@ -6,5 +6,5 @@ data class CaseNote(
     val id: String,
     var title: String,
     var text: String,
-    var position: Int
+    var lastUpdate: Long
 ):Serializable

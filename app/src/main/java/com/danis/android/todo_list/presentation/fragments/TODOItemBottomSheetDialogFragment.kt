@@ -154,13 +154,13 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     private fun getFormattedDate(date: Long?): String {
         return if (date != null) {
-            val formatter = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+            val formatter = SimpleDateFormat(DATE_PATTERN, Locale.getDefault())
             formatter.format(Date(date))
         } else ""
     }
 
     private fun getFormattedTime(time: Long): String { // must get an exact time in millis
-        val formatter = SimpleDateFormat("HH:mm", Locale.getDefault())
+        val formatter = SimpleDateFormat(TIME_PATTERN, Locale.getDefault())
         return formatter.format(Date(time))
     }
 
@@ -236,6 +236,8 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
         private const val HIGH_PRIORITY = 3
         private const val MAX_RANDOM_VALUE = 10000000
         private const val MAX_LINES_TASK_EDIT_TEXT = 6
+        private const val TIME_PATTERN = "HH:mm"
+        private const val DATE_PATTERN = "dd.MM.yy"
 
         fun newInstance(caseTODO: CaseTODO) = TODOItemBottomSheetDialogFragment().apply {
             arguments = Bundle().apply {

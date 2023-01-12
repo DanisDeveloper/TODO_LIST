@@ -1,9 +1,15 @@
 package com.danis.android.todo_list.presentation.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.danis.android.todo_list.data.RepositoryImpl
-import com.danis.android.todo_list.domain.Note.*
+import com.danis.android.todo_list.domain.Note.CaseNote
+import com.danis.android.todo_list.domain.Note.DeleteNoteItemUseCase
+import com.danis.android.todo_list.domain.Note.GetNoteListUseCase
+import com.danis.android.todo_list.domain.Note.InsertNoteItemUseCase
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -61,9 +67,7 @@ class NoteViewModel(application: Application): AndroidViewModel(application) {
             id = UUID.randomUUID().toString(),
             title = "",
             text = "",
-            position = _notesListLiveData.value?.size ?: 0
+            lastUpdate = Date().time
         )
     }
-
-
 }

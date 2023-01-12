@@ -12,15 +12,14 @@ import kotlinx.coroutines.launch
 class NoteDetailViewModel(application: Application):AndroidViewModel(application) {
     private val repository = RepositoryImpl(application)
     private val updateNoteItemUseCase = UpdateNoteItemUseCase(repository)
-    private val deleteNoteItemUseCase = DeleteNoteItemUseCase(repository)
 
     lateinit var inCaseNote: CaseNote
     lateinit var outCaseNote: CaseNote
     var savedCaseNote: CaseNote?=null
 
-    fun saveNoteItem(caseNote: CaseNote){
+    fun saveNoteItem(){
         viewModelScope.launch {
-            updateNoteItemUseCase.updateNoteItem(caseNote)
+            updateNoteItemUseCase.updateNoteItem(outCaseNote)
         }
     }
 }

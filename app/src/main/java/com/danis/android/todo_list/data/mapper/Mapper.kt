@@ -12,7 +12,7 @@ class Mapper {
             id = CaseNoteDbModel.id,
             title = CaseNoteDbModel.title,
             text = CaseNoteDbModel.text,
-            position = CaseNoteDbModel.position
+            lastUpdate = CaseNoteDbModel.lastUpdate
         )
     }
 
@@ -21,7 +21,7 @@ class Mapper {
             id = caseNote.id,
             title = caseNote.title,
             text = caseNote.text,
-            position = caseNote.position
+            lastUpdate = caseNote.lastUpdate
         )
     }
 

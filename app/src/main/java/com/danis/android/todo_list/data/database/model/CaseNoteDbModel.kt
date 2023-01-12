@@ -8,6 +8,5 @@ data class CaseNoteDbModel(
     @PrimaryKey val id: String,
     var title: String,
     var text: String,
-    var position: Int
-
+    var lastUpdate: Long
 )
