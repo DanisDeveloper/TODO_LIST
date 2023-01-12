@@ -41,7 +41,7 @@ class AlarmReceiver : BroadcastReceiver() {
         if (Build.VERSION.SDK_INT >= O) {
             context?.let {
                 val importance = NotificationManager.IMPORTANCE_HIGH
-                val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, importance)
+                val channel = NotificationChannel(CHANNEL_ID, context.getString(R.string.push_notification), importance)
                 val notificationManager = it.getSystemService(NotificationManager::class.java) as NotificationManager
                 notificationManager.createNotificationChannel(channel)
             }
@@ -49,7 +49,6 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     companion object {
-        private const val CHANNEL_NAME = "Push-ведомления"
         private const val CHANNEL_ID = "CHANNEL_ID"
         private const val CONTENT_TEXT_KEY = "CONTENT_TEXT_KEY"
         private const val MAX_RANDOM_VALUE = 10000000
