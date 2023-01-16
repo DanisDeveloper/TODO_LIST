@@ -1,16 +1,11 @@
 package com.danis.android.todo_list.presentation.adapters.todo
 
-import android.content.res.ColorStateList
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.danis.android.todo_list.R
 import com.danis.android.todo_list.databinding.TodoItemBinding
 import com.danis.android.todo_list.domain.TODO.CaseTODO
-import java.util.*
 
 class TODOAdapter(TODOList: List<CaseTODO>) : RecyclerView.Adapter<TODOViewHolder>() {
     var TODOList: List<CaseTODO> = TODOList

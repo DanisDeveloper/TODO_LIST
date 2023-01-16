@@ -229,7 +229,6 @@ class TODOItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
         private const val TIME_PICKER_TAG = "TIME_PICKER_TAG"
         private const val CASE_TODO = "CASE_TODO"
         private const val DATE_PICKER_DIALOG_TAG = "DATE_PICKER_DIALOG_TAG"
-        private const val NUMBER_OF_PRIORITIES = 3
         private const val NO_PRIORITY = 0
         private const val LOW_PRIORITY = 1
         private const val MEDIUM_PRIORITY = 2

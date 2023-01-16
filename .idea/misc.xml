@@ -19,6 +19,7 @@
         <entry key="..\:/Users/danis/AndroidStudioProjects/TODO_LIST/app/src/main/res/drawable/ic_baseline_remove_24.xml" value="0.137" />
         <entry key="..\:/Users/danis/AndroidStudioProjects/TODO_LIST/app/src/main/res/drawable/ic_baseline_work_24.xml" value="0.159" />
         <entry key="..\:/Users/danis/AndroidStudioProjects/TODO_LIST/app/src/main/res/drawable/ic_calendar.xml" value="0.162" />
+        <entry key="..\:/Users/danis/AndroidStudioProjects/TODO_LIST/app/src/main/res/drawable/ic_check.xml" value="0.166" />
         <entry key="..\:/Users/danis/AndroidStudioProjects/TODO_LIST/app/src/main/res/drawable/ic_color_lens.xml" value="0.159" />
         <entry key="..\:/Users/danis/AndroidStudioProjects/TODO_LIST/app/src/main/res/drawable/ic_notifications.xml" value="0.137" />
         <entry key="..\:/Users/danis/AndroidStudioProjects/TODO_LIST/app/src/main/res/drawable/ic_redo.xml" value="0.162" />
@@ -29,6 +30,8 @@
         <entry key="..\:/Users/danis/AndroidStudioProjects/TODO_LIST/app/src/main/res/drawable/remove.xml" value="0.159" />
         <entry key="..\:/Users/danis/AndroidStudioProjects/TODO_LIST/app/src/main/res/drawable/s.xml" value="0.162" />
         <entry key="..\:/Users/danis/AndroidStudioProjects/TODO_LIST/app/src/main/res/drawable/strike_edit_text.xml" value="0.159" />
+        <entry key="..\:/Users/danis/AndroidStudioProjects/TODO_LIST/app/src/main/res/drawable/task_corner_stroke.xml" value="0.166" />
+        <entry key="..\:/Users/danis/AndroidStudioProjects/TODO_LIST/app/src/main/res/drawable/task_shape.xml" value="0.166" />
         <entry key="..\:/Users/danis/AndroidStudioProjects/TODO_LIST/app/src/main/res/layout/activity_main.xml" value="0.2988679352838745" />
         <entry key="..\:/Users/danis/AndroidStudioProjects/TODO_LIST/app/src/main/res/layout/activity_note_detail.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/danis/AndroidStudioProjects/TODO_LIST/app/src/main/res/layout/choice_dialog_fragment.xml" value="0.2828125" />

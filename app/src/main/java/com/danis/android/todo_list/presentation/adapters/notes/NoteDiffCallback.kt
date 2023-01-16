@@ -2,7 +2,6 @@ package com.danis.android.todo_list.presentation.adapters.notes
 
 import androidx.recyclerview.widget.DiffUtil
 import com.danis.android.todo_list.domain.Note.CaseNote
-import com.danis.android.todo_list.domain.TODO.CaseTODO
 
 class NoteDiffCallback(private val oldList: List<CaseNote>, private val newList: List<CaseNote>) :
     DiffUtil.Callback() {
