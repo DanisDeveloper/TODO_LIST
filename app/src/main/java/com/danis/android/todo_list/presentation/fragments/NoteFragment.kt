@@ -40,14 +40,16 @@ class NoteFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            when(it.resultCode){
-                RESULT_OK-> {
-                    val caseNote = it.data?.getSerializableExtra(NoteDetailActivity.CASE) as CaseNote
+        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            when (it.resultCode) {
+                RESULT_OK -> {
+                    val caseNote =
+                        it.data?.getSerializableExtra(NoteDetailActivity.CASE) as CaseNote
                     noteViewModel.updateNote(caseNote)
                 }
-                RESULT_DELETE->{
-                    val caseNote = it.data?.getSerializableExtra(NoteDetailActivity.CASE) as CaseNote
+                RESULT_DELETE -> {
+                    val caseNote =
+                        it.data?.getSerializableExtra(NoteDetailActivity.CASE) as CaseNote
                     deleteNoteItemWithSnackBar(caseNote)
                 }
             }
@@ -86,7 +88,8 @@ class NoteFragment : Fragment() {
 
     private fun setupItemTouchHelper() {
         val simpleCallback = object :
-            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
