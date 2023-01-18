@@ -89,7 +89,7 @@ class NoteFragment : Fragment() {
     private fun setupItemTouchHelper() {
         val simpleCallback = object :
             ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT) {
+                ItemTouchHelper.LEFT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,

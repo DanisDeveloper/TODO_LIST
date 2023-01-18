@@ -74,7 +74,7 @@ class TODOFragment : Fragment() {
     private fun setupItemTouchHelper() {
         val simpleCallback = object : ItemTouchHelper.SimpleCallback(
             0,
-            ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT
+            ItemTouchHelper.RIGHT
         ) {
             override fun onMove(
                 recyclerView: RecyclerView,
