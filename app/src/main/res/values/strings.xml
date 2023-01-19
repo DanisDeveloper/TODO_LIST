@@ -32,4 +32,6 @@
     <string name="time_picker">TIME PICKER</string>
     <string name="okay">Okay</string>
     <string name="push_notification">Push-notifications</string>
+    <string name="task_nothing_found">No tasks for today</string>
+    <string name="note_nothing_found">No notes</string>
 </resources>

@@ -58,8 +58,14 @@ class TODOFragment : Fragment() {
         }
         todoViewModel.todoListLiveData.observe(viewLifecycleOwner) {
             todoAdapter.TODOList = it
-            if (it.isEmpty()) binding.taskNotFoundImageView.visibility = View.VISIBLE
-            else binding.taskNotFoundImageView.visibility = View.GONE
+            if (it.isEmpty()) {
+                binding.taskNotFoundImageView.visibility = View.VISIBLE
+                binding.taskNotFoundTextView.visibility = View.VISIBLE
+            }
+            else {
+                binding.taskNotFoundImageView.visibility = View.GONE
+                binding.taskNotFoundTextView.visibility = View.GONE
+            }
         }
     }
 

@@ -50,7 +50,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notes_searchView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/note_item"/>
 
     <ImageView
         android:id="@+id/notes_not_found_imageView"
@@ -61,9 +62,21 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/recyclerView"
-        app:layout_constraintVertical_bias="0.402"
+        app:layout_constraintVertical_bias="0.326"
         app:srcCompat="@drawable/ic_nothing_found"
         app:tint="?attr/colorPrimary" />
+
+    <TextView
+        android:id="@+id/notes_not_found_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/note_nothing_found"
+        android:textColor="@color/text_color"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/notes_not_found_imageView"
+        app:layout_constraintStart_toStartOf="@+id/notes_not_found_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/notes_not_found_imageView" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"

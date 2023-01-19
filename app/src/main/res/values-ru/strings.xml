@@ -33,4 +33,6 @@
     <string name="time_picker">Выбор времени уведомления</string>
     <string name="okay">Окей</string>
     <string name="push_notification">Push-уведомления</string>
+    <string name="task_nothing_found">На сегодня нет задач</string>
+    <string name="note_nothing_found">Нет заметок</string>
 </resources>

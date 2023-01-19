@@ -70,8 +70,14 @@ class NoteFragment : Fragment() {
         setupRecyclerView()
         noteViewModel.notesListLiveData.observe(viewLifecycleOwner) { list ->
             noteAdapter.notesList = list
-            if (list.isEmpty()) binding.notesNotFoundImageView.visibility = View.VISIBLE
-            else binding.notesNotFoundImageView.visibility = View.GONE
+            if (list.isEmpty()) {
+                binding.notesNotFoundImageView.visibility = View.VISIBLE
+                binding.notesNotFoundTextView.visibility = View.VISIBLE
+            }
+            else{
+                binding.notesNotFoundImageView.visibility = View.GONE
+                binding.notesNotFoundTextView.visibility = View.GONE
+            }
         }
         noteViewModel.searchStringLiveData.observe(viewLifecycleOwner) {
             noteViewModel.loadListNotes()
