@@ -35,12 +35,12 @@ abstract class AppDataBase : RoomDatabase() {
 }
 val migration_1_2 = object:Migration(1,2){
     override fun migrate(database: SupportSQLiteDatabase) {
-        database.execSQL("ALTER TABLE CaseTODO RENAME TO CaseTODODbModel")
-        database.execSQL("ALTER TABLE CaseTODODbModel RENAME COLUMN position TO priority")
-        database.execSQL("ALTER TABLE CaseTODODbModel ADD COLUMN notificationId INTEGER DEFAULT NULL")
-        database.execSQL("ALTER TABLE CaseNotes RENAME TO CaseNoteDbModel")
-        database.execSQL("ALTER TABLE CaseNoteDbModel RENAME COLUMN Title TO title")
-        database.execSQL("ALTER TABLE CaseNoteDbModel RENAME COLUMN position TO lastUpdate")
+        database.execSQL("CREATE TABLE CaseTODODbModel(id TEXT PRIMARY KEY NOT NULL,date INTEGER NOT NULL,todo TEXT NOT NULL, isSolved INTEGER NOT NULL, priority INTEGER NOT NULL, notificationTime INTEGER, notificationId INTEGER)")
+        database.execSQL("INSERT INTO CaseTODODbModel(id,date,todo,isSolved,priority) SELECT id,date,todo,isSolved,position FROM CaseTODO")
+        database.execSQL("DROP TABLE CaseTODO")
+        database.execSQL("CREATE TABLE CaseNoteDbModel(id TEXT PRIMARY KEY NOT NULL,title TEXT NOT NULL,text TEXT NOT NULL,lastUpdate INTEGER NOT NULL)")
+        database.execSQL("INSERT INTO CaseNoteDbModel(id,title,text,lastUpdate) SELECT id,Title,text,position FROM CaseNotes")
+        database.execSQL("DROP TABLE CaseNotes")
     }
 
 }
